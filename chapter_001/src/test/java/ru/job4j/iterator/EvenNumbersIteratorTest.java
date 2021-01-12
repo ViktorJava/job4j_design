@@ -1,4 +1,4 @@
-package ru.job4j.it;
+package ru.job4j.iterator;
 
 import org.junit.Before;
 import org.junit.Test;
