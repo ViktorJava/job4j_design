@@ -1,7 +1,7 @@
 package generics;
 
 /**
- * Package name: generics
+ * Модель данных описывающая тигра.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1

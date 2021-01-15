@@ -7,15 +7,15 @@ import java.util.List;
 /**
  * <h2>0. Что такое обобщенные типы (generics) [#438904]</h2>
  * Добавить 3 модели данных, которые образуют иерархию наследования:
- * Animal -> Predator -> Tiger.
+ * {@link Animal} -> {@link Predator} -> {@link Tiger}
  * Написать код использующий модели.
- * <ul>При этом:
+ * @implNote
  * <li>1-ый метод - работает без ограничений, т.е. в него можно передавать
  * коллекцию, которая хранит любые типы.
  * <li>2-ой метод - должен иметь ограничение сверху и
- * ограничиваться классом Predator.
+ * ограничиваться классом {@link Predator}.
  * <li>3-ий метод - должен иметь ограничение снизу и
- * ограничиваться классом Predator.
+ * ограничиваться классом {@link Predator}.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -36,20 +36,19 @@ public class Generics {
         gen.printObject(third);
         System.out.println();
 
-        gen.printBoundedWildCard(first);
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
 
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
-        gen.printLowerBoundedWildCard(third);
     }
 
     /**
-     * WildCard.
+     * <h2>WildCard.</h2>
      * Метод - работает без ограничений, т.е. в него можно передавать
      * коллекцию, которая хранит любые типы.
+     *
      * @param list Список данных любого типа.
      */
     public void printObject(List<?> list) {
@@ -60,26 +59,28 @@ public class Generics {
     }
 
     /**
-     * Bounded WildCard.
+     * <h2>Bounded WildCard.</h2>
      * Метод - должен иметь ограничение сверху и
-     * ограничиваться классом Predator.
+     * ограничиваться классом {@link Predator}.
+     *
      * @param list Список данных.
      */
-    public void printBoundedWildCard(List<? extends Animal> list) {
-        for (Iterator<? extends Animal> it = list.iterator(); it.hasNext();) {
+    public void printBoundedWildCard(List<? extends Predator> list) {
+        for (Iterator<? extends Predator> it = list.iterator(); it.hasNext();) {
             Object next = it.next();
             System.out.println("Текущий элемент: " + next);
         }
     }
 
     /**
-     *  Lower bounded WildCard
-     *  Метод - должен иметь ограничение снизу и
-     *  ограничиваться классом Predator.
+     * <h2>Lower bounded WildCard</h2>
+     * Метод - должен иметь ограничение снизу и
+     * ограничиваться классом {@link Predator}.
+     *
      * @param list Список данных.
      */
-    public void printLowerBoundedWildCard(List<? super Tiger> list) {
-        for (Iterator<? super Tiger> it = list.iterator(); it.hasNext();) {
+    public void printLowerBoundedWildCard(List<? super Predator> list) {
+        for (Iterator<? super Predator> it = list.iterator(); it.hasNext();) {
             Object next = it.next();
             System.out.println("Текущий элемент: " + next);
         }

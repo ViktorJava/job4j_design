@@ -1,7 +1,7 @@
 package generics;
 
 /**
- * Package name: generics
+ * Модель данных описывающая животного.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -14,14 +14,6 @@ public class Animal {
     public Animal(String name, int age) {
         this.name = name;
         this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     @Override
