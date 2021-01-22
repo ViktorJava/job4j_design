@@ -33,8 +33,8 @@ public class SimpleArray<T> implements Iterable<T> {
     private Object[] elements;
     private int pos = 0;
 
-    public SimpleArray(Object[] size) {
-        this.elements = size;
+    public SimpleArray(int size) {
+        this.elements = new Object[size];
     }
 
     /**
@@ -43,7 +43,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model Добавляемый элемент.
      */
     public void add(T model) {
-
+        if (pos > elements.length) {
+            throw new IndexOutOfBoundsException();
+        }
+        elements[pos++] = model;
     }
 
     /**
@@ -72,7 +75,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @return Возвращаемый элемент.
      */
     public T get(int index) {
-        return null;
+        return (T) elements[index];
     }
 
     @Override
