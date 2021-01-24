@@ -28,9 +28,11 @@ public class MatrixIt implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
+        //если есть строка но строка пустая {{},{}} двигаемся на следующую строку.
         while (row < data.length && data[row].length == 0) {
             row++;
         }
+        //true если есть строка и в строке есть столбцы
         return (row < data.length && col < data[row].length);
     }
 
@@ -47,7 +49,7 @@ public class MatrixIt implements Iterator<Integer> {
         }
         int result = data[row][col++];
 
-        while (row < data.length && col >= data[row].length) {
+        if (col >= data[row].length) {
             row++;
             col = 0;
         }
