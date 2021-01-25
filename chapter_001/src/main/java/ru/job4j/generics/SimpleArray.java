@@ -52,7 +52,6 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException Переполнение структуры.
      */
     public void add(T model) throws IndexOutOfBoundsException {
-        checkIndex(pos, elements.length);
         elements[pos++] = model;
     }
 
@@ -65,7 +64,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException Выход индекса за пределы структуры.
      */
     public void set(int index, T model) throws IndexOutOfBoundsException {
-        checkIndex(index, elements.length);
+        checkIndex(index, pos);
         elements[index] = model;
     }
 
@@ -78,7 +77,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public T get(int index) throws IndexOutOfBoundsException {
-        checkIndex(index, elements.length);
+        checkIndex(index, pos);
         return (T) elements[index];
     }
 
@@ -89,7 +88,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException Выход индекса за пределы структуры.
      */
     public void remove(int index) throws IndexOutOfBoundsException {
-        checkIndex(index, elements.length);
+        checkIndex(index, pos);
         System.arraycopy(elements, index + 1, elements, index,
                 elements.length - index - 1);
         elements[--this.pos] = null;

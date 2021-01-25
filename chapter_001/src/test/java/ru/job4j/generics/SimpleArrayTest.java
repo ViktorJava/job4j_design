@@ -62,7 +62,7 @@ public class SimpleArrayTest {
     /**
      * Тест удаления элемента.
      */
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenDelElement() {
         SimpleArray<String> simpleArray = new SimpleArray<>(3);
         simpleArray.add("one");
