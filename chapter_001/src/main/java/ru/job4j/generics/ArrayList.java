@@ -63,6 +63,13 @@ public class ArrayList<T> implements List<T> {
 
     }
 
+    /**
+     * Вернуть элемент по заданному индексу. Обработать исключение
+     * выхода индекса за допустимый диапазон {@link IndexOutOfBoundsException}
+     *
+     * @param index индекс возвращаемого элемента.
+     * @return Возвращаемый элемент.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public T get(int index) {
@@ -77,12 +84,12 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public T first() {
-        return null;
+        return get(0);
     }
 
     @Override
     public T last() {
-        return null;
+        return get(size - 1);
     }
 
     @Override
@@ -97,7 +104,7 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
