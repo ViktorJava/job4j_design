@@ -1,15 +1,15 @@
 package ru.job4j.generics;
 
 /**
- * Реализация для пользователя.
+ * Реализация ролей.
  * Используем композицию объектов.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
- * @since 24.01.2021
+ * @since 29.01.2021
  */
-public class UserStore implements Store<User> {
-    private final Store<User> store = new MemStore<>();
+public class RoleStore implements Store<Role> {
+    private final Store<Role> store = new MemStore<>();
 
     /**
      * Добавление элемента в хранилище.
@@ -17,7 +17,7 @@ public class UserStore implements Store<User> {
      * @param model Добавляемый элемент.
      */
     @Override
-    public void add(User model) {
+    public void add(Role model) {
         store.add(model);
     }
 
@@ -30,7 +30,7 @@ public class UserStore implements Store<User> {
      * элемента в хранилище, иначе false.
      */
     @Override
-    public boolean replace(String id, User model) {
+    public boolean replace(String id, Role model) {
         return store.replace(id, model);
     }
 
@@ -53,7 +53,7 @@ public class UserStore implements Store<User> {
      * @return Метод возвращает найденный объект, иначе null.
      */
     @Override
-    public User findById(String id) {
+    public Role findById(String id) {
         return store.findById(id);
     }
 }

@@ -14,7 +14,17 @@ public abstract class Base {
         this.id = id;
     }
 
+    /**
+     * Возвращает идентификатор объекта.
+     *
+     * @return Уникальный идентификатор.
+     */
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Base{" + "id='" + id + '\'' + '}';
     }
 }
