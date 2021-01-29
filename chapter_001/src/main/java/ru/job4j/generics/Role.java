@@ -8,7 +8,7 @@ package ru.job4j.generics;
  * @since 29.01.2021
  */
 public class Role extends Base {
-    protected Role(String id) {
+    public Role(String id) {
         super(id);
     }
 }
