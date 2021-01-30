@@ -57,6 +57,6 @@ public class ArrayListTest {
         arrayList.add(10);
         arrayList.add(20);
         arrayList.add(30);
-        assertThat(arrayList.last(),is(30));
+        assertThat(arrayList.last(), is(30));
     }
 }
