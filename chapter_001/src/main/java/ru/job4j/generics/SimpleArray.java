@@ -75,7 +75,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @return Возвращаемый элемент.
      * @throws IndexOutOfBoundsException Выход индекса за пределы структуры.
      */
-
+    @SuppressWarnings("unchecked")
     public T get(int index) throws IndexOutOfBoundsException {
         checkIndex(index, pos);
         return (T) elements[index];
@@ -95,6 +95,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Iterator<T> iterator() {
         return new Iterator<>() {
             int counter = 0;
