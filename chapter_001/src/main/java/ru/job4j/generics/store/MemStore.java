@@ -1,4 +1,4 @@
-package ru.job4j.generics;
+package ru.job4j.generics.store;
 
 import java.util.ArrayList;
 import java.util.List;

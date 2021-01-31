@@ -1,6 +1,9 @@
-package ru.job4j.generics;
+package ru.job4j.generics.store;
 
 import org.junit.Test;
+import ru.job4j.generics.store.Store;
+import ru.job4j.generics.store.User;
+import ru.job4j.generics.store.UserStore;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
