@@ -1,7 +1,9 @@
 package ru.job4j.collection;
 
-import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -17,10 +19,35 @@ public class SimpleLinkedListTest {
     SimpleLinkedList<Integer> simpleLinkedList = new SimpleLinkedList<>();
 
     @Test
-    @Ignore
-    public void whenAdd() {
+    public void whenAddIntoEmptyList() {
         simpleLinkedList.add(10);
-        Integer expected = simpleLinkedList.get(0);
-        assertThat(expected, is(10));
+        simpleLinkedList.add(20);
+        Integer expected = simpleLinkedList.get(1);
+        assertThat(expected, is(20));
+    }
+
+    @Test
+    public void whenEmpty() {
+        simpleLinkedList.add(10);
+        assertThat(simpleLinkedList.isEmpty(), is(false));
+    }
+
+    @Test
+    public void whenIsEmptyOnEmptyList() {
+        assertThat(simpleLinkedList.isEmpty(), is(true));
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenFailFastException() {
+        simpleLinkedList.add(10);
+        Iterator<Integer> iterator = simpleLinkedList.iterator();
+        simpleLinkedList.add(10);
+        iterator.next();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenGetOutBound() {
+        simpleLinkedList.add(10);
+        assertThat(simpleLinkedList.get(1), is(0));
     }
 }
