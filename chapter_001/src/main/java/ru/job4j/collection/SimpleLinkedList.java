@@ -25,62 +25,50 @@ import java.util.Objects;
  * @since 01.02.2021
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
-    private Node<E> first;
-    private int modCount;
+    private Node<E> head;
+    private Node<E> tail; //хвост цепочки данных
+    private int modCount; //fail-fast поведение.
     private int size;
 
-    /**
-     * Метод возвращает элемент хранилища по заданному индексу.
-     *
-     * @param index Индекс возвращаемого элемента.
-     * @return Возвращаемый элемент.
-     */
-    public E get(int index) {
-        Objects.checkIndex(index, size);
-
-        return null;
+    public boolean isEmpty() {
+        return head == null;
     }
 
     /**
-     * Метод добавляет элемент в хранилище.
+     * Метод добавляет элемент данных в конец списка.
      *
-     * @param value Добавляемый элемент в хранилище имеющий тип {@code <E>}
+     * @param value Добавляемый элемент в хранилище.
      */
     public void add(E value) {
-        Node<E> newLink = new Node<>(value, null);
-        newLink.next = first;
-        first = newLink;
+        Node<E> node = new Node<>(value, null);
+        if (isEmpty()) {
+            head = node;
+        } else {
+            tail.next = node;
+        }
+        tail = node;
         modCount++;
         size++;
     }
 
     /**
-     * Возвращает итератор по элементам типа {@code <E>}.
+     * Метод возвращает элемент данных по заданному индексу.
      *
-     * @return Возвращаемый итератор.
+     * @param index Индекс возвращаемого элемента.
+     * @return Возвращаемый элемент.
+     * @throws IndexOutOfBoundsException Бросается исключение при выходе индекса
+     *                                   за допустимый диапазон.
      */
-    @Override
-    public Iterator<E> iterator() {
-        return new Iterator<>() {
-            private final int expectedModCount = modCount;
-            private final Node<E> node = first;
-
-            @Override
-            public boolean hasNext() {
-                if (modCount != expectedModCount) {
-                    throw new ConcurrentModificationException();
-                }
-                return node != null;
+    public E get(int index) {
+        Objects.checkIndex(index, size);
+        Node<E> current = head;
+        for (int i = 0; i < size; i++) {
+            if (i == index) {
+                break;
             }
-
-            @Override
-            public E next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return null;
-            }
-        };
+            current = current.next;
+        }
+        return current.value;
     }
 
     private static class Node<E> {
@@ -91,5 +79,40 @@ public class SimpleLinkedList<E> implements Iterable<E> {
             this.value = value;
             this.next = next;
         }
+    }
+
+    /**
+     * С целью прикручивания структуры данных к циклу типа forEach,
+     * реализуется интерфейс {@link Iterable}.
+     * Возвращается итератор бегущий по элементам данных, типа {@code <E>}.
+     *
+     * @return Возвращаемый итератор.
+     * @throws ConcurrentModificationException нарушение fail-fast поведения.
+     * @throws NoSuchElementException          обращение у несуществующему элементу.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private final int expectedModCount = modCount;
+            private Node<E> pointer = head; //указатель
+
+            @Override
+            public boolean hasNext() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return pointer != null;
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                E value = pointer.value;
+                pointer = pointer.next;
+                return value;
+            }
+        };
     }
 }
