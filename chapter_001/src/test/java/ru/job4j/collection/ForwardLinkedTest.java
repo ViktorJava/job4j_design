@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Тесты метода удаления первого элемента в цепочке данных.
+ * Тесты методов удаления элементов в цепочке данных.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -38,5 +38,14 @@ public class ForwardLinkedTest {
         assertThat(linked.deleteFirst(), is(1));
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next(), is(2));
+    }
+
+    @Test
+    public void whenDelete() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        linked.add(2);
+        assertThat(linked.deleteLast(), is(2));
+        assertThat(linked.deleteLast(), is(1));
     }
 }

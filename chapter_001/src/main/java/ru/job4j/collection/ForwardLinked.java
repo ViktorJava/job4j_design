@@ -44,13 +44,33 @@ public class ForwardLinked<T> implements Iterable<T> {
      *                                удалить несуществующий элемент.
      */
     public T deleteFirst() {
-        T result;
         if (head == null) {
             throw new NoSuchElementException();
         }
-        result = head.value;
+        T result = head.value;
         head = head.next;
         return result;
+    }
+
+    /**
+     * Метод удаляет элемент данных в конце списка.
+     *
+     * @return Значение удалённого элемента.
+     * @throws NoSuchElementException Бросается исключение в случае отсутствия
+     *                                элементов в списке.
+     */
+    public T deleteLast() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        var current = head;
+        var previous = head;
+        while (current.next != null) {
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null; //обрыв связи с последним элементом списка.
+        return current.value;
     }
 
     private static class Node<T> {
