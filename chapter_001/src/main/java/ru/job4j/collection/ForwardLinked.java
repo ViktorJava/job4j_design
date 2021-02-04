@@ -63,13 +63,17 @@ public class ForwardLinked<T> implements Iterable<T> {
         if (head == null) {
             throw new NoSuchElementException();
         }
-        var current = head;
-        var previous = head;
+        Node<T> current = head;
+        Node<T> previous = head;
+
         while (current.next != null) {
             previous = current;
             current = current.next;
         }
-        previous.next = null; //обрыв связи с последним элементом списка.
+        if (current == previous) {
+            head = null; //удаление последнего оставшегося элемента в списке.
+        }
+        previous.next = null; //обрыв связи предыдущего с последующим элементом.
         return current.value;
     }
 
