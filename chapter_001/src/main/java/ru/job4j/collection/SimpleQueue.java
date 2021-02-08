@@ -2,9 +2,11 @@ package ru.job4j.collection;
 
 /**
  * <h2>Очередь на двух стеках [#438883]</h2>
- * Реализовать класс {@code SimpleQueue} это очередь.
- * Метод {@code poll()} - должен возвращать первое значение и удалять его из коллекции.
- * Метод {@code push(T value)} - помещает значение в конец.
+ * Реализовать класс {@code SimpleQueue} - это очередь
+ * FIFO - First Input First Output. Очередь реализованна на базе двух стеков.
+ * <li>Метод {@code T poll()} - должен возвращать первое значение
+ * и удалять его из коллекции.
+ * <li>Метод {@code push(T value)} - помещает значение в конец.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -20,14 +22,20 @@ public class SimpleQueue<T> {
      * @return Первое значение.
      */
     public T poll() {
-        return null;
+        if (out.isEmpty()) {
+            while (!in.isEmpty()) {
+                out.push(in.pop());
+            }
+        }
+        return out.pop();
     }
 
     /**
-     * Метод помещает значение в конец.
+     * Метод помещает значение в конец очереди.
      *
-     * @param value Помещаемое значение.
+     * @param value Помещаемое значение в очередь.
      */
     public void push(T value) {
+        in.push(value);
     }
 }
