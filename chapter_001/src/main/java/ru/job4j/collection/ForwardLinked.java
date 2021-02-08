@@ -5,12 +5,13 @@ import java.util.NoSuchElementException;
 
 /**
  * <h2>Удалить head в односвязном списке. [#438878]</h2>
- * Необходимо реализовать метод delete для односвязного списка.
+ * Необходимо реализовать методы delete для односвязного списка.
+ * <li>{@code T deleteFirst()}
+ * <li>{@code T deleteLast()}
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
- * @implNote Реализовать метод {@code deleteFirst()}.
- * В методе {@code delete} должна быть проверка, что {@code head != null}.
+ * @implNote В методах {@code delete} должна быть проверка, что {@code head != null}.
  * Этот случай проверяется в тесте.
  * @since 03.02.2021
  */
@@ -24,7 +25,7 @@ public class ForwardLinked<T> implements Iterable<T> {
      */
     public void add(T value) {
         Node<T> node = new Node<>(value, null);
-        if (head == null) {
+        if (isEmpty()) {
             head = node;
             return;
         }
@@ -44,12 +45,16 @@ public class ForwardLinked<T> implements Iterable<T> {
      *                                удалить несуществующий элемент.
      */
     public T deleteFirst() {
-        if (head == null) {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
         T result = head.value;
         head = head.next;
         return result;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 
     /**
@@ -60,7 +65,7 @@ public class ForwardLinked<T> implements Iterable<T> {
      *                                элементов в списке.
      */
     public T deleteLast() {
-        if (head == null) {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
         Node<T> current = head;
