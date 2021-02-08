@@ -1,3 +1,5 @@
+[Перейти на домашнюю страницу](../README.md)
+
 # Блок 1 - Структуры данных и алгоритмы.
 > Изученные темы в процессе прохождения блокa.
 
@@ -56,13 +58,10 @@
 * [Создать элементарную структуру дерева.]() Познакомимся с алгоритмом обхода дерева в ширину - **breadth first search**.
 * [Добавить метод boolean isBinary().]() Метод должен проверять количество дочерних элементов в дереве. Если их > 2 - то дерево не бинарное.
 
-## [Лицензия](https://github.com/ViktorJava/job4j/tree/master/LICENSE)
-MIT
+## Лицензия
 
-<mark>Free Software, Hell Yeah!</mark>
+[MIT. Free Software!](https://github.com/ViktorJava/job4j/tree/master/LICENSE)
 
 ---
 
 [Перейти на домашнюю страницу](../README.md)
-
-
