@@ -30,6 +30,11 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     private int modCount; //fail-fast поведение.
     private int size;
 
+    /**
+     * Метод проверяет контейнер на пустоту.
+     *
+     * @return true если контейнер пустой, иначе false.
+     */
     public boolean isEmpty() {
         return head == null;
     }
