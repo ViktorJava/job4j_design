@@ -53,6 +53,11 @@ public class ForwardLinked<T> implements Iterable<T> {
         return result;
     }
 
+    /**
+     * Метод проверяет односвязный список на пустоту.
+     *
+     * @return true если список пустой, иначе false.
+     */
     public boolean isEmpty() {
         return head == null;
     }
@@ -82,6 +87,28 @@ public class ForwardLinked<T> implements Iterable<T> {
         return current.value;
     }
 
+    /**
+     * Метод обращение односвязного списка.
+     *
+     * @throws NoSuchElementException Бросается исключение в случае отсутствия
+     *                                элементов в списке.
+     */
+    public void revert() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        Node<T> current = head;
+        Node<T> previous = head;
+
+        while (current != null) {
+            Node<T> next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        head = previous;
+    }
+
     private static class Node<T> {
         T value;
         Node<T> next;
@@ -95,7 +122,7 @@ public class ForwardLinked<T> implements Iterable<T> {
     /**
      * С целью прикручивания структуры данных к циклу типа forEach,
      * реализуется интерфейс {@link Iterable}.
-     * Возвращается итератор бегущий по элементам данных, типа {@code <E>}.
+     * Возвращается итератор бегущий по элементам данных, типа {@code <T>}.
      *
      * @return Возвращаемый итератор.
      * @throws NoSuchElementException обращение у несуществующему элементу.
