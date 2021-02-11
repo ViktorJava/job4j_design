@@ -45,8 +45,7 @@ public class ListUtils {
         Objects.checkIndex(index, list.size());
         ListIterator<T> i = list.listIterator();
         while (i.hasNext()) {
-            int a = i.previousIndex();
-            if (a == index) {
+            if (i.previousIndex() == index) {
                 i.add(value);
                 break;
             }
@@ -64,7 +63,6 @@ public class ListUtils {
      */
     public static <T> List<T> removeIf(List<T> list, Predicate<T> filter) {
         ListIterator<T> i = list.listIterator();
-        //noinspection Java8CollectionRemoveIf
         while ((i.hasNext())) {
             if (filter.test(i.next())) {
                 i.remove();
@@ -102,7 +100,6 @@ public class ListUtils {
      */
     public static <T> List<T> removeAll(List<T> list, List<T> elements) {
         ListIterator<T> i = list.listIterator();
-        //noinspection Java8CollectionRemoveIf
         while (i.hasNext()) {
             if (elements.contains(i.next())) {
                 i.remove();
