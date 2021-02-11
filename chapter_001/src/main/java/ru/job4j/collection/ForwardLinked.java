@@ -89,13 +89,10 @@ public class ForwardLinked<T> implements Iterable<T> {
 
     /**
      * Метод обращение односвязного списка.
-     *
-     * @throws NoSuchElementException Бросается исключение в случае отсутствия
-     *                                элементов в списке.
      */
     public void revert() {
         if (isEmpty()) {
-            throw new NoSuchElementException();
+            return;
         }
         Node<T> current = head;
         Node<T> previous = head;
