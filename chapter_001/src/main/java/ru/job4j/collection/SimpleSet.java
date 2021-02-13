@@ -1,14 +1,16 @@
 package ru.job4j.collection;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * <h2>Реализовать коллекцию Set на массиве [#438906]</h2>
- * 1. Реализовать коллекцию SimpleSet. Коллекция должна обеспечивать
- * boolean add(E e) и реализовывать Iterable<E>. Коллекция не должна хранить дубликаты.
- * 2. Написать тесты на наличие дубликатов
- * 3. Написать тест с учетом null элемента. Подумайте какой метод класса
- * Objects можно использовать в этой задаче
+ * Реализовать коллекцию {@code SimpleSet}. Коллекция должна обеспечивать:
+ * <li>{@code boolean add(E e)} и реализовывать {@code Iterable<E>}.
+ * <li>Коллекция не должна хранить дубликаты.
+ * <li>Написать тесты на наличие дубликатов
+ * <li>Написать тест с учетом {@code null} элемента.
+ * <li>Какой метод класса {@code Objects} можно использовать в этой задаче.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -17,12 +19,34 @@ import java.util.Iterator;
 class SimpleSet<T> implements Iterable<T> {
     private final SimpleArrayD<T> repository = new SimpleArrayD<>();
 
+    /**
+     * Метод добавляет элемент в множество включая null, при этом исключая дубликаты.
+     *
+     * @param e Добавляемый элемент.
+     * @return true в случае удачного добавления, иначе false.
+     */
     public boolean add(T e) {
+        if (!contains(e)) {
+            repository.add(e);
+            return true;
+        }
         return false;
     }
 
-    public int size() {
-        return repository.size();
+    /**
+     * Валидация на дубликаты, вынесена в отдельный метод по причине fail-fast
+     * итератора.
+     *
+     * @param e Элемент проверяемый на наличие дубликата в хранилище.
+     * @return true в случае наличия дубликата в хранилище, иначе false.
+     */
+    private boolean contains(T e) {
+        for (T element: repository) {
+            if (Objects.equals(e, element)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
