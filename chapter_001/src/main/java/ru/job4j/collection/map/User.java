@@ -1,9 +1,10 @@
 package ru.job4j.collection.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
- * Модель с переопределённым equals().
+ * Модель с переопределённым equals() и hashCode().
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -32,5 +33,10 @@ public class User {
         return children == user.children
                 && name.equals(user.name)
                 && birthday.equals(user.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
     }
 }

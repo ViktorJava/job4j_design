@@ -3,7 +3,7 @@ package ru.job4j.collection.map;
 import java.util.*;
 
 /**
- * ППереопределить только equals [#438912]
+ * Переопределить и equals и hashCode [#438910]
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
