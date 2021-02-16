@@ -3,7 +3,7 @@ package ru.job4j.collection.map;
 import java.util.*;
 
 /**
- * Переопределить только hashCode [#438911]
+ * ППереопределить только equals [#438912]
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -22,5 +22,14 @@ public class UsageUser {
         System.out.println(map.get(user2));
         System.out.println(user1.hashCode());
         System.out.println(user2.hashCode());
+
+        Set<User> set = new HashSet<>();
+        set.add(user1);
+        set.add(user2);
+        System.out.printf("Set size: %s elements \n", set.size());
+
+        if (user1.equals(user2)) {
+            System.out.println("OK: user1.equals(user2)");
+        }
     }
 }
