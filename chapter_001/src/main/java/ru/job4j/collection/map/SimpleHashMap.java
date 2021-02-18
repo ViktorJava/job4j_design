@@ -42,7 +42,14 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return Значение.
      */
     public V get(K key) {
-        return null;
+        if (table[hash(key)] != null && table[hash(key)] == key) {
+            return table[hash(key)].getValue();
+        }
+        throw new NoSuchElementException();
+    }
+
+    private int hash(K key) {
+        return key.hashCode() % capacity;
     }
 
     /**

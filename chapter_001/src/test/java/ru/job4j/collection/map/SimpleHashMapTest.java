@@ -1,5 +1,6 @@
 package ru.job4j.collection.map;
 
+import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -23,7 +24,9 @@ public class SimpleHashMapTest {
 
     @Test
     public void whenGet() {
-
+        SimpleHashMap<Integer, String> simpleHashMap = new SimpleHashMap<>();
+        simpleHashMap.insert(1, "first");
+        assertThat(simpleHashMap.get(1), Matchers.is("first"));
     }
 
     @Test
