@@ -48,10 +48,6 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
         throw new NoSuchElementException();
     }
 
-    private int hash(K key) {
-        return key.hashCode() % capacity;
-    }
-
     /**
      * Метод удаляет значение по ключу.
      *
@@ -60,6 +56,28 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      */
     boolean delete(K key) {
         return false;
+    }
+
+    /**
+     * Метод расчёта и сжатия хэш-кода ключа.
+     *
+     * @param key Ключ.
+     * @return Индекс бакета.
+     */
+    private int hash(K key) {
+        return key.hashCode() % capacity;
+    }
+
+    /**
+     * Рост хэш-таблицы при нехватке места для вставки нового элемента.
+     */
+    private void expandTable() {
+        capacity *= 2;
+        Node<K, V>[] tempTable = new Node[capacity];
+        for (Node<K, V> n: table) {
+            tempTable[hash(n.getKey())] = n;
+        }
+        table = tempTable;
     }
 
     /**
