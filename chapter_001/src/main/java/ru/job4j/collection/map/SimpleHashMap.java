@@ -5,24 +5,32 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Ассоциативный массив на базе хэш-таблицы унифицирован через генерики
+ * Ассоциативный массив на базе хэш-таблицы унифицирован через джейнерик
  * и иметь методы:
- * <li>{@code boolean insert(K key, V value);}
- * <li>{@code V get(K key)};
- * <li>{@code boolean delete(K key);}
- * Реализован итератор, обладающий fail-fast поведением.
- * Внутренняя реализация использует массив.
- * Обеспечивает фиксированное время вставки и получение.
- * Предусмотрена возможность роста хэш-таблицы при нехватке места для нового элемента.
+ * <pre>
+ * {@code boolean insert(K key, V value);}
+ * {@code V get(K key)};
+ * {@code boolean delete(K key);}
+ * </pre>
+ * <li> Реализован итератор, обладающий fail-fast поведением.
+ * <li> Внутренняя реализация использует массив.
+ * <li> Обеспечивает фиксированное время вставки и получение.
+ * <li> Предусмотрена возможность роста хэш-таблицы при нехватке места для нового элемента.
+ * <li> Методы разрешения коллизий не реализован. Если, при добавлении,
+ * ключ уже есть, то возвращать false.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 17.02.2021
  */
 public class SimpleHashMap<K, V> implements Iterable<V> {
-    private int modCount = 0;
+    private int modCount;
     private int capacity = 16;
+    @SuppressWarnings("unchecked")
     private Node<K, V>[] table = new Node[capacity];
+    private int size;
+    private static final float LOAD_FACTOR = 0.75F;
+
 
     /**
      * Метод, вставляет запись в таблицу по ключу и его значению.
@@ -31,7 +39,16 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @param value Значение.
      * @return true в случае удачи, иначе false.
      */
-    boolean insert(K key, V value) {
+    public boolean insert(K key, V value) {
+        if (table[hash(key)] == null) {
+            if (size >= capacity * LOAD_FACTOR) {
+                expandTable();
+            }
+            table[hash(key)] = new Node<>(key, value);
+            size++;
+            modCount++;
+            return true;
+        }
         return false;
     }
 
@@ -42,7 +59,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return Значение.
      */
     public V get(K key) {
-        if (table[hash(key)] != null && table[hash(key)] == key) {
+        if (table[hash(key)] != null && table[hash(key)].getKey().equals(key)) {
             return table[hash(key)].getValue();
         }
         throw new NoSuchElementException();
@@ -54,7 +71,13 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @param key Ключ.
      * @return true в случае удачи, иначе false.
      */
-    boolean delete(K key) {
+    public boolean delete(K key) {
+        if (table[hash(key)] != null && table[hash(key)].getKey().equals(key)) {
+            table[hash(key)] = null;
+            size--;
+            modCount++;
+            return true;
+        }
         return false;
     }
 
@@ -65,17 +88,20 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return Индекс бакета.
      */
     private int hash(K key) {
-        return key.hashCode() % capacity;
+        return key == null ? 0 : key.hashCode() % capacity;
     }
 
     /**
      * Рост хэш-таблицы при нехватке места для вставки нового элемента.
      */
+    @SuppressWarnings("unchecked")
     private void expandTable() {
         capacity *= 2;
         Node<K, V>[] tempTable = new Node[capacity];
-        for (Node<K, V> n: table) {
-            tempTable[hash(n.getKey())] = n;
+        for (Node<K, V> node: table) {
+            if (node != null) {
+                tempTable[hash(node.getKey())] = node;
+            }
         }
         table = tempTable;
     }
