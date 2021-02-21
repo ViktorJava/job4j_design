@@ -91,6 +91,10 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
         return key == null ? 0 : key.hashCode() % capacity;
     }
 
+    public int size() {
+        return capacity;
+    }
+
     /**
      * Рост хэш-таблицы при нехватке места для вставки нового элемента.
      */
@@ -141,7 +145,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return index < capacity;
+                return index < size;
             }
 
             @Override
