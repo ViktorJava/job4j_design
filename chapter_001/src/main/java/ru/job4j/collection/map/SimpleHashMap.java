@@ -25,7 +25,7 @@ import java.util.NoSuchElementException;
  */
 public class SimpleHashMap<K, V> implements Iterable<V> {
     private int modCount;
-    private int capacity = 16;
+    private int capacity = 1 << 4; // 16
     @SuppressWarnings("unchecked")
     private Node<K, V>[] table = new Node[capacity];
     private int size;
@@ -88,19 +88,60 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return Индекс бакета.
      */
     private int hash(K key) {
-        return key == null ? 0 : key.hashCode() % capacity;
+        int h;
+        if (key == null) {
+            return 0;
+        } else {
+            h = key.hashCode();
+            return (capacity - 1) & (h ^ (h >>> 16));
+        }
     }
 
+    /**
+     * Метод возвращает размер хранилища.
+     *
+     * @return Размер хранилища.
+     */
     public int size() {
         return capacity;
     }
 
     /**
+     * Метод возвращает первое простое число >min
+     *
+     * @param min Минимальное число от которого выполняется поиск простого числа.
+     * @return Первое просто число >min.
+     */
+    private int getPrime(int min) {
+        for (int j = min + 1; true; j++) {
+            if (isPrime(j)) {
+                return j;
+            }
+        }
+    }
+
+    /**
+     * Метод проверяет число n на простоту.
+     *
+     * @param n Проверяемое число на простоту.
+     * @return true в случае простого числа, иначе false.
+     */
+    private boolean isPrime(int n) {
+        for (int j = 2; j * j <= n; j++) {
+            if (n % j == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Рост хэш-таблицы при нехватке места для вставки нового элемента.
+     * Метод выполняет перехеширование.
      */
     @SuppressWarnings("unchecked")
     private void expandTable() {
-        capacity *= 2;
+        capacity = getPrime(capacity * 2);
         Node<K, V>[] tempTable = new Node[capacity];
         for (Node<K, V> node: table) {
             if (node != null) {

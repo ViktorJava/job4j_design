@@ -69,6 +69,6 @@ public class SimpleHashMapTest {
         for (int i = 0; i < 13; i++) {    // capacity * 0.75
             input.insert(i, i);
         }
-        assertThat(input.size(), is(32));
+        assertThat(input.size(), is(37));
     }
 }
