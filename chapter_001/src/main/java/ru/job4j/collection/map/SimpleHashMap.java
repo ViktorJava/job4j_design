@@ -40,11 +40,12 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return true в случае удачи, иначе false.
      */
     public boolean insert(K key, V value) {
-        if (table[hash(key)] == null) {
+        int hashCode = hash(key);
+        if (table[hashCode] == null) {
             if (size >= capacity * LOAD_FACTOR) {
                 expandTable();
             }
-            table[hash(key)] = new Node<>(key, value);
+            table[hashCode] = new Node<>(key, value);
             size++;
             modCount++;
             return true;
@@ -59,8 +60,9 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return Значение.
      */
     public V get(K key) {
-        if (table[hash(key)] != null && table[hash(key)].getKey().equals(key)) {
-            return table[hash(key)].getValue();
+        int hashCode = hash(key);
+        if (table[hashCode] != null && table[hashCode].getKey().equals(key)) {
+            return table[hashCode].getValue();
         }
         throw new NoSuchElementException();
     }
@@ -72,8 +74,9 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @return true в случае удачи, иначе false.
      */
     public boolean delete(K key) {
-        if (table[hash(key)] != null && table[hash(key)].getKey().equals(key)) {
-            table[hash(key)] = null;
+        int hashCode = hash(key);
+        if (table[hashCode] != null && table[hashCode].getKey().equals(key)) {
+            table[hashCode] = null;
             size--;
             modCount++;
             return true;
