@@ -31,6 +31,15 @@ public class SimpleQueue<T> {
     }
 
     /**
+     * Метод проверяет очередь на пустоту.
+     *
+     * @return возвращает true если очередь пуста, иначе false.
+     */
+    public boolean isEmpty() {
+        return in.isEmpty() && out.isEmpty();
+    }
+
+    /**
      * Метод помещает значение в конец очереди.
      *
      * @param value Помещаемое значение в очередь.

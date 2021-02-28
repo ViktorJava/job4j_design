@@ -57,4 +57,12 @@ public class SimpleQueueTest {
         queue.push(3);
         assertThat(queue.poll(), is(2));
     }
+
+    @Test
+    public void whenIsEmpty() {
+        SimpleQueue<Integer> simpleQueue = new SimpleQueue<>();
+        simpleQueue.push(1);
+        simpleQueue.poll();
+        assertThat(simpleQueue.isEmpty(), is(true));
+    }
 }
