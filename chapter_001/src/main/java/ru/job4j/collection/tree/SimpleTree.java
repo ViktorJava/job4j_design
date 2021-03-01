@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Интерфейс описывающий SimpleTree дерево.
+ * Интерфейс описывающий бинарное дерево.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -16,6 +16,11 @@ public interface SimpleTree<E> {
 
     Optional<Node<E>> findBy(E value);
 
+    /**
+     * Nested class описывает узел дерева.
+     *
+     * @param <E> Тип узла дерева.
+     */
     class Node<E> {
         final E value;
         final List<Node<E>> children = new ArrayList<>();
