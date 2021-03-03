@@ -28,10 +28,12 @@ class Tree<E> implements SimpleTree<E> {
      */
     @Override
     public boolean add(E parent, E child) {
-        if (findBy(parent).isPresent() && findBy(child).isEmpty()) {
-            return root.children.add(new Node<>(child));
+        boolean rsl = false;
+        Optional<Node<E>> foundParent = findBy(parent);
+        if (foundParent.isPresent() && findBy(child).isEmpty()) {
+            rsl = foundParent.get().children.add(new Node<>(child));
         }
-        return false;
+        return rsl;
     }
 
     /**
