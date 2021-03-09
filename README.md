@@ -12,6 +12,20 @@
 
 [![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=ViktorJava&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
+## Технологии и инструменты:
+<p align="center">
+<img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="java" width="120" height="60"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" alt="intellij" height="40"/>
+<img src="https://www.vectorlogo.zone/logos/github/github-ar21.svg" alt="github" height="60"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Maven_logo.svg/680px-Maven_logo.svg.png" alt="maven" height="40"/>
+<img src="https://www.vectorlogo.zone/logos/travis-ci/travis-ci-ar21.svg" alt="Travis CI" width="120" height="60"/>
+<img src="images/checkstyle.png" alt="CheckStyle"  height="40"/>
+<img src="images/codecov.png" alt="Codecov"  height="40"/>
+<img src="images/javafx.png" alt="JavaFX"  height="40"/>
+<img src="images/junit.png" alt="JUnit"  height="40"/>
+<img src="images/jcf.png" alt="JCF"  width="80"/>
+</p>
+
 ## Уровень "Джуниор"
 > Изученные блоки в процессе стажировки.
 
@@ -32,9 +46,6 @@
 ~~[Блок 4. Garbage Collection](#)~~
 
 ~~[Блок 5. ООД](#)~~
-
-## Изученные технологии на данном этапе
-![Технологии](images/title.png) 
 
 ## Лицензия
 	

@@ -82,6 +82,11 @@
 21. Расскажите про реализации деревьев.
 22. Что такое **loadFactor.**
 
+### 7.1. Проект: "Почта"
+По результатам проверки знаний, ментором, было предложено выполнить [техническое задание](https://github.com/ViktorJava/mail)
+### 7.2. Расчёт статистики по коллекции.
+[Для закрепления полученных знаний, необходимо выполнить задание.](https://github.com/ViktorJava/job4j_design/issues/32) 
+
 ## Лицензия
 
 [MIT. Free Software!](https://github.com/ViktorJava/job4j/tree/master/LICENSE)
