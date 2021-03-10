@@ -1,9 +1,14 @@
 package ru.job4j.analize;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
- * Статистика по коллекции.
+ * <h2>Статистика по коллекции.</h2>
+ * Результат работы класса, сводиться к определению разницы между
+ * начальным состояние объекта и измененным.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -18,30 +23,24 @@ public class Analize {
      * @return Результаты анализа входных данных.
      */
     public Info diff(List<User> previous, List<User> current) {
-        if (previous == null || current == null) {
+        if (previous.size() == 0 && current.size() == 0) {
             throw new NoSuchElementException();
         }
-        int add = 0;
-        int change = 0;
-        int del = 0;
+
+        Info info = new Info();
         Map<Integer, String> prevMap = new HashMap<>();
-        Map<Integer, String> curMap = new HashMap<>();
         for (User pUser: previous) {
             prevMap.put(pUser.id, pUser.name);
         }
         for (User cUser: current) {
-            curMap.put(cUser.id, cUser.name);
             if (!prevMap.containsKey(cUser.id)) {
-                add++;
-            } else {
-                if (!cUser.getName().equals(prevMap.get(cUser.getId()))) {
-                    change++;
-                }
+                info.added++;
+            } else if (!cUser.name.equals(prevMap.get(cUser.id))) {
+                info.changed++;
             }
-            //TODO : как считать del?!
-            //del=
+            info.deleted = previous.size() - current.size() + info.added;
         }
-        return new Info(add, change, del);
+        return info;
     }
 
     /**
@@ -61,31 +60,6 @@ public class Analize {
             this.id = id;
             this.name = name;
         }
-
-        public int getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-            User user = (User) o;
-            return id == user.id;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(id);
-        }
     }
 
     /**
@@ -95,23 +69,5 @@ public class Analize {
         int added;
         int changed;
         int deleted;
-
-        public Info(int added, int changed, int deleted) {
-            this.added = added;
-            this.changed = changed;
-            this.deleted = deleted;
-        }
-
-        public int getAdded() {
-            return added;
-        }
-
-        public int getChanged() {
-            return changed;
-        }
-
-        public int getDeleted() {
-            return deleted;
-        }
     }
 }
