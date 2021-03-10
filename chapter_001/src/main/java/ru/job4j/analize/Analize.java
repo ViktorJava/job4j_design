@@ -1,10 +1,10 @@
 package ru.job4j.analize;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
+ * Статистика по коллекции.
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 04.03.2021
@@ -21,9 +21,27 @@ public class Analize {
         if (previous == null || current == null) {
             throw new NoSuchElementException();
         }
-        HashMap<Integer, User> hashMap = new HashMap<>();
-        //TODO : Написать анализ входных данных.
-        return null;
+        int add = 0;
+        int change = 0;
+        int del = 0;
+        Map<Integer, String> prevMap = new HashMap<>();
+        Map<Integer, String> curMap = new HashMap<>();
+        for (User pUser: previous) {
+            prevMap.put(pUser.id, pUser.name);
+        }
+        for (User cUser: current) {
+            curMap.put(cUser.id, cUser.name);
+            if (!prevMap.containsKey(cUser.id)) {
+                add++;
+            } else {
+                if (!cUser.getName().equals(prevMap.get(cUser.getId()))) {
+                    change++;
+                }
+            }
+            //TODO : как считать del?!
+            //del=
+        }
+        return new Info(add, change, del);
     }
 
     /**
@@ -43,6 +61,31 @@ public class Analize {
             this.id = id;
             this.name = name;
         }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            User user = (User) o;
+            return id == user.id;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
+        }
     }
 
     /**
@@ -53,17 +96,22 @@ public class Analize {
         int changed;
         int deleted;
 
-        /**
-         * Конструктор класса Info.
-         *
-         * @param added   Сколько добавлено новых пользователей.
-         * @param changed Сколько изменено пользователей.
-         * @param deleted Сколько удалено пользователей.
-         */
         public Info(int added, int changed, int deleted) {
             this.added = added;
             this.changed = changed;
             this.deleted = deleted;
+        }
+
+        public int getAdded() {
+            return added;
+        }
+
+        public int getChanged() {
+            return changed;
+        }
+
+        public int getDeleted() {
+            return deleted;
         }
     }
 }
