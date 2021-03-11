@@ -21,14 +21,10 @@ public class LogFilter {
      */
     public static List<String> filter(String file) {
         List<String> result = new ArrayList<>();
-        List<String> temp = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            in.lines().forEach(temp::add);
-            for (String s: temp) {
-                if (s.contains("404")) {
-                    result.add(s);
-                }
-            }
+            in.lines()
+              .filter(e -> e.contains("404"))
+              .forEach(result::add);
         } catch (Exception e) {
             e.printStackTrace();
         }
