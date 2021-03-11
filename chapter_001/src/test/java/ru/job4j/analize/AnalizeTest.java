@@ -5,7 +5,6 @@ import ru.job4j.analize.Analize.Info;
 import ru.job4j.analize.Analize.User;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -18,13 +17,6 @@ import static org.junit.Assert.assertThat;
  * @since 04.03.2021
  */
 public class AnalizeTest {
-
-    @Test(expected = NoSuchElementException.class)
-    public void whenException() {
-        List<User> previous = List.of();
-        List<User> current = List.of();
-        new Analize().diff(previous, current);
-    }
 
     @Test
     public void whenDeleted() {

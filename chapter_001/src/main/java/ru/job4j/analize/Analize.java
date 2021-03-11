@@ -3,7 +3,6 @@ package ru.job4j.analize;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 /**
  * <h2>Статистика по коллекции.</h2>
@@ -23,10 +22,6 @@ public class Analize {
      * @return Результаты анализа входных данных.
      */
     public Info diff(List<User> previous, List<User> current) {
-        if (previous.size() == 0 && current.size() == 0) {
-            throw new NoSuchElementException();
-        }
-
         Info info = new Info();
         Map<Integer, String> prevMap = new HashMap<>();
         for (User pUser: previous) {
@@ -38,8 +33,8 @@ public class Analize {
             } else if (!cUser.name.equals(prevMap.get(cUser.id))) {
                 info.changed++;
             }
-            info.deleted = previous.size() - current.size() + info.added;
         }
+        info.deleted = previous.size() - current.size() + info.added;
         return info;
     }
 
