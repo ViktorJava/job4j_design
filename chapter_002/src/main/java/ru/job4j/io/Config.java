@@ -22,13 +22,14 @@ public class Config {
 
     /**
      * Метод должен считать все ключи и их значения в карту values.
-     * В файле могут быть пустые строки и комментарии их пропускаем.
+     * В файле могут быть пустые строки и комментарии, их пропускаем.
      */
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
                 .filter(e -> !e.contains("#") && e.contains("="))
                 .map(e -> e.split("="))
+                .filter(e -> e.length > 1)
                 .forEach(e -> values.put(e[0], e[1]));
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +44,7 @@ public class Config {
      */
     public String value(String key) {
         if (!values.containsKey(key)) {
-            throw new UnsupportedOperationException("Don't impl this method yet!");
+            throw new UnsupportedOperationException("Value is empty!");
         }
         return values.get(key);
     }
