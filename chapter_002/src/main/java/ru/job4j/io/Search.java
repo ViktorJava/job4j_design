@@ -15,12 +15,21 @@ import java.util.function.Predicate;
  * @since 18.03.2021
  */
 public class Search {
-//TODO пока даже шаблон написать не могу.
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
-        //Files.walkFileTree(start, new PrintFiles());
-        search(start, p -> p.toFile().getName().endsWith("java")).forEach(System.out::println);
+        search(start, p -> p
+                .toFile()
+                .getName()
+                .endsWith("java")).forEach(System.out::println);
     }
+
+    /**
+     * Метод поиска файлов в заданной директории, согласно предикату.
+     * @param root Корневая директория.
+     * @param condition Предикат поиска файлов.
+     * @return Список найденных файлов.
+     * @throws IOException При возникновении IO исключений.
+     */
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         PrintFiles searcher = new PrintFiles(condition);
         Files.walkFileTree(root, searcher);
