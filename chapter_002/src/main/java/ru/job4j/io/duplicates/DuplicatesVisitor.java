@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Ядро посетителя.
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 23.03.2021
@@ -16,6 +18,15 @@ import java.util.Set;
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private final Set<FileProperty> propertyAll = new HashSet<>();
 
+    /**
+     * Метод вызывается каждый раз, когда встречается файл.
+     * Используем этот метод, чтобы проверить файл на дубликатность.
+     *
+     * @param file  Проверяемый файл.
+     * @param attrs Атрибуты проверяемого файла.
+     * @return CONTINUE.
+     * @throws IOException Возможно возникновение IO исключений.
+     */
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(file

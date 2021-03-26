@@ -10,28 +10,12 @@ import java.util.Objects;
  * @since 23.03.2021
  */
 public class FileProperty {
-    private long size;
-    private String name;
+    private final long size;
+    private final String name;
 
     public FileProperty(long size, String name) {
         this.size = size;
         this.name = name;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override
