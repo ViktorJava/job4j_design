@@ -17,8 +17,10 @@ public class Dir {
      * @param args Аргументы метода.
      */
     public static void main(String[] args) {
-        String dir = "c:\\projects\\job4j_design\\chapter_002\\src\\main\\java\\ru\\job4j\\io\\";
-        File file = new File(dir);
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+        }
+        File file = new File(args[0]);
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("No exist %s",
                     file.getAbsoluteFile()));
@@ -27,9 +29,12 @@ public class Dir {
             throw new IllegalArgumentException(String.format("No directory %s",
                     file.getAbsoluteFile()));
         }
+        int totalSize = 0;
         for (File subFile: file.listFiles()) {
+            totalSize += (int) subFile.length();
             System.out.printf("file name: %s, size: %d%n",
                     subFile.getName(), subFile.length());
         }
+        System.out.printf("Total size: %d Kb", totalSize);
     }
 }
