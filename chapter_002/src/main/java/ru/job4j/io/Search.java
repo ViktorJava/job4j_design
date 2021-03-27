@@ -15,17 +15,27 @@ import java.util.function.Predicate;
  * @since 18.03.2021
  */
 public class Search {
+    private static void usage() {
+        System.out.println("Usage: search <PATH> <FILE_EXTENSION>");
+        System.out.println("Example: java -jar search.jar c:\\projects\\job4j_design java");
+        System.exit(-1);
+    }
+
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
+        if (args.length != 2) {
+            usage();
+        }
+        Path start = Paths.get(args[0]);
         search(start, p -> p
                 .toFile()
                 .getName()
-                .endsWith("java")).forEach(System.out::println);
+                .endsWith(args[1])).forEach(System.out::println);
     }
 
     /**
      * Метод поиска файлов в заданной директории, согласно предикату.
-     * @param root Корневая директория.
+     *
+     * @param root      Корневая директория.
      * @param condition Предикат поиска файлов.
      * @return Список найденных файлов.
      * @throws IOException При возникновении IO исключений.
