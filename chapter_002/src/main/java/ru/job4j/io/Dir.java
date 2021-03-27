@@ -32,9 +32,10 @@ public class Dir {
         int totalSize = 0;
         for (File subFile: file.listFiles()) {
             totalSize += (int) subFile.length();
-            System.out.printf("file name: %s, size: %d%n",
-                    subFile.getName(), subFile.length());
+            double d = (double) subFile.length();
+            System.out.printf("file name: %s, size: %.1f Kb%n",
+                    subFile.getName(), d / 1024);
         }
-        System.out.printf("Total size: %d Kb", totalSize);
+        System.out.printf("Total size: %d Kb", totalSize / 1024);
     }
 }
