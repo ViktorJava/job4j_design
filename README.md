@@ -40,6 +40,14 @@
 * **Tree**. Изучение структуры — деревья.
 
 <a href="doc/IO.md" target="_blank">Блок 2. Ввод-вывод.</a>
+* Байтовые потоки ввода-вывода: **FileOutputStream**, **FileInputStream**.
+* Символьные потоки ввода-вывода: **InputStreamReader**, **OutputStreamWriter**.
+* Классы и интерфейсы: **File**, **Files**, **Path**, **Paths**.
+* Буферизированные байтовые потоки ввода-вывода: **BufferedOutputStream**, **BufferedInputStream**.
+* Буферизированные байтовые потоки ввода-вывода: **BufferedReader**, **BufferedOutputStream**.
+* Буферизированные символьные потоки ввода-вывода: **PrintWriter**.
+* **NIO (Non-blocking I/O, New I/O)**. Коллекция API, предназначенных для реализации высокопроизводительных операций ввода-вывода.
+
 
 ~~[Блок 3. SQL, JDBC](#)~~
 
