@@ -21,6 +21,9 @@ public class ArgsName {
      * @return Значение
      */
     public String get(String key) {
+        if (!values.containsKey(key)) {
+            throw new IllegalArgumentException("No such parameter exists");
+        }
         return values.get(key);
     }
 
@@ -30,9 +33,6 @@ public class ArgsName {
      * @param args Массив параметров в формате -ключ=значение.
      */
     private void parse(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException();
-        }
         for (String arg: args) {
             String[] split = arg.replaceFirst("-", "").split("=");
             if (split.length != 2) {
