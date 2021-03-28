@@ -101,10 +101,10 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>duplicatesFinder</finalName>
+                            <finalName>pack</finalName>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ru.job4j.io.duplicates.DuplicatesFinder</mainClass>
+                                    <mainClass>ru.job4j.io.Zip</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
