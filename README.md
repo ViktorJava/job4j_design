@@ -1,4 +1,4 @@
-# Программист Вдовиченко Виктор
+# Программист Вдовиченко Виктор [<img alt="Logo" src="images/logo.png" height="80" align="right"/>](https://www.vectorlogo.zone)
 > Начал стажировку на курсе **Java** разработчика. 
 > Ниже перечислены проекты, реализованые мной во время стажировки. 
 > Проекты будут добавляться по мере реализации.
@@ -15,13 +15,13 @@
 ## Технологии и инструменты:
 <p align="center">
 <img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="java" width="120" height="60"/>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1024px-IntelliJ_IDEA_Logo.svg.png" alt="intellij" height="40"/>
+<img src="images/idea.png" alt="intellij" height="50"/>
 <img src="https://www.vectorlogo.zone/logos/github/github-ar21.svg" alt="github" height="60"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Maven_logo.svg/680px-Maven_logo.svg.png" alt="maven" height="40"/>
 <img src="https://www.vectorlogo.zone/logos/travis-ci/travis-ci-ar21.svg" alt="Travis CI" width="120" height="60"/>
 <img src="images/checkstyle.png" alt="CheckStyle"  height="40"/>
 <img src="images/codecov.png" alt="Codecov"  height="40"/>
-<img src="images/javafx.png" alt="JavaFX"  height="40"/>
+<img src="images/javafx.png" alt="JavaFX"  height="50"/>
 <img src="images/junit.png" alt="JUnit"  height="40"/>
 <img src="images/jcf.png" alt="JCF"  width="80"/>
 </p>
@@ -37,9 +37,9 @@
 * **List**. Структура данных – список, описывается интерфейсом `List`.
 * **Set**. Всё что касается интерфейса `Set` и его наиболее употребительными реализациями.
 * **Map**. Одна из самых часто используемых структур данных – **HashMap**.
-* **Tree**. Изучение структуры - деревья.
+* **Tree**. Изучение структуры — деревья.
 
-~~[Блок 2. Ввод-вывод](#)~~
+<a href="doc/IO.md" target="_blank">Блок 2. Ввод-вывод.</a>
 
 ~~[Блок 3. SQL, JDBC](#)~~
 
