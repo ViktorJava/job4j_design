@@ -27,17 +27,22 @@ public class Zip {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Path root = Paths.get("c:\\projects\\job4j_design\\chapter_002");
-        List<Path> listPath = Search.search(root, p -> !p
-                .toFile()
-                .getName()
-                .endsWith("xml"));
-        List<File> listFile = new ArrayList<>();
-        for (Path path: listPath) {
-            listFile.add(path.toFile());
-            System.out.println(path.toFile());
+    public static void main(String[] args) {
+        ArgsName argsName = ArgsName.of(args);
+        Path root = Paths.get(argsName.get("d"));
+        try {
+            List<Path> listPath = Search.search(root, p -> !p
+                    .toFile()
+                    .getName()
+                    .endsWith(argsName.get("e")));
+            List<File> listFile = new ArrayList<>();
+            for (Path path: listPath) {
+                listFile.add(path.toFile());
+                System.out.println(path.toFile());
+            }
+            new Zip().packFiles(listFile, new File(argsName.get("o")));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        new Zip().packFiles(listFile, new File("zip.zip"));
     }
 }
