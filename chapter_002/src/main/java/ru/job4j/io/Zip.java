@@ -43,28 +43,32 @@ public class Zip {
      * Метод формирует список всех файлов в заданном каталоге
      * включая подкаталоги учитывая исключенные файлы.
      *
-     * @param filePaths Корневой каталог.
+     * @param filePath Корневой каталог.
      * @param exclude   Расширение исключенных файлов.
      * @return Список файлов.
      */
-    private static List<File> searchFile(Path filePaths, String exclude) {
-        List<Path> listPath = new ArrayList<>();
+    private static List<File> searchFile(Path filePath, String exclude) {
+        List<Path> listPaths = new ArrayList<>();
         try {
-            listPath = Search.search(filePaths,
+            listPaths = Search.search(filePath,
                     p -> !p.toFile()
                            .getName()
                            .endsWith(exclude));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<File> listFile = new ArrayList<>();
-        for (Path path: listPath) {
-            listFile.add(path.toFile());
+        List<File> listFiles = new ArrayList<>();
+        for (Path path: listPaths) {
+            listFiles.add(path.toFile());
         }
-        return listFile;
+        return listFiles;
     }
 
     public static void main(String[] args) {
+        if (args.length != 3) {
+            throw new IllegalArgumentException(
+                    "Example: java -jar pack.jar <PATH> <EXCLUDE_FILE> <ARCHIVE_NAME>");
+        }
         ArgsName argsName = ArgsName.of(args);
         Path root = Paths.get(argsName.get("d")); //directory
         new Zip().packFiles(searchFile(root, argsName.get("e")), //exclude
