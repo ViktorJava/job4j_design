@@ -16,23 +16,36 @@ import java.net.Socket;
  */
 public class EchoServer {
     public static void main(String[] args) throws IOException {
-        try (ServerSocket server = new ServerSocket(9000)) {
+        try (ServerSocket server = new ServerSocket(9001)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
+                socket.setSoTimeout(5000);
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
+                    String[] msg;
+                    String[] tmp;
+                    String sss;
+                    String answer = "Salam";
                     while (!(str = in.readLine()).isEmpty()) {
-                        if (str.contains("Bye")) {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                            server.close();
-                        }
-                        if (str.contains("Hello")) {
-                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                            out.write("Hello.".getBytes());
+                        System.out.println(str);
+                        if (str.contains("/?msg")) {
+                            msg = str.split(" ");
+                            tmp = msg[1].split("msg=", 2);
+                            sss = tmp[1];
+                            if (sss.equals("Hi")) {
+                                answer = "Hello";
+                            } else if (sss.equals("Bye")) {
+                                answer = "Bye-bye";
+                                server.close();
+                            } else {
+                                answer = sss;
+                            }
                         }
                     }
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    out.write(answer.getBytes());
                 }
             }
         }
