@@ -8,7 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Класс реализации simple server, работающего по протоколу HTTP.
+ * Класс реализации simple server, работающего по протоколу HTTP.<p>
+ * Сервер, представляет собой, простого бота, который реагирует на<p>
+ * команды клиента передаваемые в виде Get запроса: {@code GET /?msg=Hello HTTP/1.1}<p>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -16,31 +18,31 @@ import java.net.Socket;
  */
 public class EchoServer {
     public static void main(String[] args) throws IOException {
-        try (ServerSocket server = new ServerSocket(9001)) {
+        try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
-                socket.setSoTimeout(5000);
+                socket.setSoTimeout(3000);
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
-                    String[] msg;
-                    String[] tmp;
-                    String sss;
-                    String answer = "Salam";
+                    String[] message;
+                    String[] splitMsg;
+                    String request;
+                    String answer = "Hi. I'm simple server.";
                     while (!(str = in.readLine()).isEmpty()) {
                         System.out.println(str);
                         if (str.contains("/?msg")) {
-                            msg = str.split(" ");
-                            tmp = msg[1].split("msg=", 2);
-                            sss = tmp[1];
-                            if (sss.equals("Hi")) {
-                                answer = "Hello";
-                            } else if (sss.equals("Bye")) {
-                                answer = "Bye-bye";
+                            message = str.split(" ");
+                            splitMsg = message[1].split("msg=", 2);
+                            request = splitMsg[1];
+                            if (request.equals("Hello")) {
+                                answer = "Hi man!";
+                            } else if (request.equals("Exit")) {
+                                answer = "Server stopped...";
                                 server.close();
                             } else {
-                                answer = sss;
+                                answer = request;
                             }
                         }
                     }
