@@ -15,10 +15,17 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        String name = "Petr Arsentev";
+        int age = 33;
+        double cash = 100.5;
+        boolean probability = true;
+        char index = 'A';
+        long ln = 92237;
+        short sh = 32767;
+        byte by = 127;
+        LOG.debug("User info name : {}, age : {}", name, age);
+        LOG.debug("available : {} thousand dollars.", cash);
+        LOG.debug("probability : {}, index : {}.", probability, index);
+        LOG.debug("long : {}, short {}, byte {}.", ln, sh, by);
     }
 }
