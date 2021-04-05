@@ -21,7 +21,7 @@ import java.net.Socket;
  * @since 01.04.2021
  */
 public class EchoServer {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
@@ -31,28 +31,29 @@ public class EchoServer {
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
-                    String[] message;
-                    String[] splitMsg;
-                    String request;
                     String answer = "Hi. I'm simple server.";
                     while (!(str = in.readLine()).isEmpty()) {
                         System.out.println(str);
                         if (str.contains("/?msg")) {
-                            message = str.split(" ");
-                            splitMsg = message[1].split("msg=", 2);
-                            request = splitMsg[1];
+                            String[] message = str.split(" ");
+                            String[] splitMsg = message[1].split("msg=", 2);
+                            String request = splitMsg[1];
                             if (request.equals("Hello")) {
                                 answer = "Hi man!";
                             } else if (request.equals("Exit")) {
-                                answer = "Server stopped...";
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                                out.write("Server stopped...".getBytes());
                                 server.close();
+                                break; //Сервер закрыт, не обрабатываем оставшиеся запросы.
                             } else {
                                 answer = request;
                             }
                         }
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    out.write(answer.getBytes());
+                    if (!server.isClosed()) {
+                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                        out.write(answer.getBytes());
+                    }
                 }
             }
         } catch (IOException e) {
