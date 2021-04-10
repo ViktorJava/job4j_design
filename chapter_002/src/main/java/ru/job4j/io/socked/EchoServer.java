@@ -32,7 +32,8 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
                     String answer = "Hi. I'm simple server.";
-                    while (!(str = in.readLine()).isEmpty()) {
+                    str = in.readLine();
+                    while (!str.isEmpty()) {
                         System.out.println(str);
                         if (str.contains("/?msg")) {
                             String[] message = str.split(" ");
@@ -49,6 +50,7 @@ public class EchoServer {
                                 answer = request;
                             }
                         }
+                        str = in.readLine();
                     }
                     if (!server.isClosed()) {
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
