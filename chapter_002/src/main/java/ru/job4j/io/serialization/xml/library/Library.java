@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Класс Library описывает библиотеку книг, с полями:
  * quantity- количество книг, presence- наличие книг, book- член класса Book,
- * comments- комментарий.
+ * comments- впечатления о книге как таковой.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -36,8 +36,8 @@ public class Library {
 
     public static void main(String[] args) {
         Library library = new Library(100500, true, new
-                Book(2020, "Herbert Schildt"),
-                "very good book", "about Java");
+                Book(2020, "Herbert Schildt", "The complete reference"),
+                "This is very good book", "...very heavy book.");
         System.out.println(library);
     }
 }
