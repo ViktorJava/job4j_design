@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<library quantity="100500" presence="true">
+    <book>
+        <year>2020</year>
+        <author>Herbert Schildt</author>
+    </book>
+    <comments>
+        <comment>Worker</comment>
+        <comment>Married</comment>
+    </comments>
+</library>
