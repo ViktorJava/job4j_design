@@ -1,4 +1,4 @@
-package ru.job4j.io.serialization.json;
+package ru.job4j.io.serialization.json.gadget;
 
 /**
  * ККласс Spec описывает спецификацию гаджета, с полями:
