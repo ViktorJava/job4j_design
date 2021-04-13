@@ -6,9 +6,12 @@ import com.google.gson.GsonBuilder;
 import java.util.Arrays;
 
 /**
- * Класс Phone описывает телефон, с полями:
- * available- наличие в продаже, yar- год выпуска, spec- член класса Spec,
- * status- old, new, broken, etc.
+ * Класс {@link Phone} описывает телефон, с полями:
+ * <ul>
+ * <li>{@code available} - наличие в продаже
+ * <li>{@code year} - год выпуска
+ * <li>{@code spec} - член класса {@link Spec}
+ * <li>{@code status} - old, new, broken, etc.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -19,6 +22,22 @@ public class Phone {
     private final int year;
     private final Spec spec;
     private final String[] status;
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public Spec getSpec() {
+        return spec;
+    }
+
+    public String[] getStatus() {
+        return status;
+    }
 
     public Phone(boolean available, int year, Spec spec, String... status) {
         this.available = available;

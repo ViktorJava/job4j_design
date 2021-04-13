@@ -1,8 +1,10 @@
 package ru.job4j.io.serialization.json.gadget;
 
 /**
- * ККласс Spec описывает спецификацию гаджета, с полями:
- * ram- объём оперативной памяти, cpu- название процессора.
+ * Класс {@link Spec} описывает спецификацию гаджета, с полями:
+ * <ul>
+ * <li>ram- объём оперативной памяти
+ * <li>cpu- название процессора.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -11,6 +13,14 @@ package ru.job4j.io.serialization.json.gadget;
 public class Spec {
     private final int ram;
     private final String cpu;
+
+    public int getRam() {
+        return ram;
+    }
+
+    public String getCpu() {
+        return cpu;
+    }
 
     public Spec(int ram, String cpu) {
         this.ram = ram;
