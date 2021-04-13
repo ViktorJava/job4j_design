@@ -33,8 +33,17 @@
   3) Во всех остальных случаях отправлять текст запроса.
 
 ## 2. Логгирование 
+* [Log4j.](https://github.com/ViktorJava/job4j_design/issues/50) Логирование системы.
+* [Slf4j.](https://github.com/ViktorJava/job4j_design/issues/51) **Simple Login Facade 4 Java**.
+* [Slf4j.](https://github.com/ViktorJava/job4j_design/issues/52) Вывод переменных.
+* [Slf4j.](https://github.com/ViktorJava/job4j_design/issues/53) Вывод **exception**.
 
 ## 3. Сериализация
+* [Что такое Сериализация.](https://github.com/ViktorJava/job4j_design/issues/54) 
+* [Формат JSON.](https://github.com/ViktorJava/job4j_design/issues/55)
+* [Формат XML.](https://github.com/ViktorJava/job4j_design/issues/56) 
+* [JAXB.](https://github.com/ViktorJava/job4j_design/issues/57) Преобразование **XML** в **POJO** 
+* [Преобразование JSON в POJO.](https://github.com/ViktorJava/job4j_design/issues/58)
 
 ## 7. Экзамен. Ввод-вывод.
 **Контрольные вопросы.**
