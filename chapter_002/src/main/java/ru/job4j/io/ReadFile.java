@@ -14,8 +14,8 @@ import java.io.FileReader;
  */
 public class ReadFile {
     public static void main(String[] args) {
-        bufferedReader("input.txt");
-        streamReader("input.txt");
+        bufferedReader("chapter_002/data/input.txt");
+        streamReader("chapter_002/data/input.txt");
     }
 
     /**
