@@ -20,6 +20,8 @@ public class ConsoleChat {
     private static final String STOP = "стоп"; // бот замолкает
     private static final String CONTINUE = "продолжить";
     private static final String LS = System.lineSeparator();
+    List<String> answersList = new ArrayList<>();
+    List<String> dialogList = new ArrayList<>();
 
     public ConsoleChat(String dialogLog, String botAnswers) {
         this.dialogLog = dialogLog;
@@ -27,57 +29,60 @@ public class ConsoleChat {
     }
 
     /**
-     * Метод формирует список фраз полученных из файла и
-     * возвращает случайную фразу из списка. Повторяемость фраз не учитывается.
-     *
-     * @return Случайная фраза.
+     * Метод чтения файла с разговорными фразами бота.
      */
-    public String getAnswerBot() {
-        String answer = "";
-        List<String> list = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(botAnswers));
+    public void readAnswers() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(botAnswers))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                list.add(line);
+                answersList.add(line);
             }
-            int i = new Random().nextInt(list.size());
-            answer = list.get(i);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return answer;
+    }
+
+    /**
+     * Метод записи диалога в файл.
+     */
+    public void dialogWriter() {
+        try (BufferedWriter bw = new BufferedWriter(new
+                FileWriter(dialogLog, StandardCharsets.UTF_8))) {
+            for (String str: dialogList) {
+                bw.write(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Ядро чата.
      */
     public void run() {
-        try (BufferedReader bReader = new BufferedReader(new
-                InputStreamReader(System.in, StandardCharsets.UTF_8));
-             BufferedWriter bWriter = new BufferedWriter(new
-                     FileWriter(dialogLog, StandardCharsets.UTF_8))) {
+        try (BufferedReader br = new BufferedReader(new
+                InputStreamReader(System.in, StandardCharsets.UTF_8))) {
+            readAnswers();
             String inputString = "";
-            boolean flag = true;
-            StringBuilder dialogString;
-            while (!(OUT.equals(inputString))) {
-                inputString = bReader.readLine();
-                //TODO расход памяти.
-                dialogString = new StringBuilder(String.format("User: %s%s", inputString, LS));
+            boolean enabledBot = true;
+            do {
+                inputString = br.readLine();
+                dialogList.add(String.format("User: %s%s", inputString, LS));
                 if (STOP.equals(inputString)) {
-                    flag = false;
+                    enabledBot = false;
                 }
                 if (CONTINUE.equals(inputString) || OUT.equals(inputString)) {
-                    flag = true;
-                } else if (flag) {
-                    String answer = String.format("Bot: %s%s", getAnswerBot(), LS);
+                    enabledBot = true;
+                } else if (enabledBot) {
+                    int i = new Random().nextInt(answersList.size());
+                    String answer = answersList.get(i);
+                    dialogList.add(String.format("Bot: %s%s", answer, LS));
                     System.out.println(answer);
-                    dialogString.append(answer);
                 }
-                bWriter.write(dialogString.toString());
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+            } while (!(OUT.equals(inputString)));
+            dialogWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
