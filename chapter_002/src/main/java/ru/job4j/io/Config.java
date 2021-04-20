@@ -36,6 +36,26 @@ public class Config {
         }
     }
 
+    // Метод читает файл конфигурации.
+    // Структура файла: ключ = значение, могут быть пустые с ключи и комментарии.
+    //
+    //public void load() {
+    //    try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+    //        Predicate<String> isCommented = s -> s.startsWith("#");
+    //        Predicate<String> isEmpty = String::isEmpty;
+    //        values.putAll(
+    //                read
+    //                        .lines()
+    //                        .filter(isCommented.negate().and(isEmpty.negate()))
+    //                        .map(s -> s.split("="))
+    //                        .filter(e -> e.length > 1)
+    //                        .collect(Collectors.toMap(s -> s[0], s -> s[1]))
+    //        );
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }
+    //}
+
     /**
      * Метод возвращает значение ключа.
      *
