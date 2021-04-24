@@ -1,7 +1,4 @@
--- Удаление таблицы если существует.
-DROP TABLE IF EXISTS car_card;
-
-create table car_card(
+create table car_card (
 id serial primary key,
 	car_model varchar (30),
 	date_creation date,
