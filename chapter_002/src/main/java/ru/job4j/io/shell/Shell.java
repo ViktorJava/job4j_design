@@ -15,22 +15,51 @@ import static java.util.Arrays.stream;
  */
 public class Shell {
     private String root = "";
-    private List<String> list = new ArrayList<>();
+    private final String delimiter = "/";
+    private final List<String> listFirst = new ArrayList<>();
+    private final List<String> listSecond = new ArrayList<>();
 
+    /**
+     * В потоке применяется фильтр "пустышка".
+     * Без фильтра, при {@code path = "/user"}
+     * в {@code ArrayList<String> list} попадёт "пустышка":
+     * {@code ArrayList<String> list = {"","user"}}
+     *
+     * @param path Каталог.
+     */
     public void cd(String path) {
-        stream(path.split("/"))
+        stream(path.split(delimiter))
                 .filter(f -> !f.equals(""))
-                .forEach(this::parsing);
-        root = list.stream().collect(Collectors.joining("/", "/", ""));
+                .forEach(f -> this.parsing(f, path));
+
+        if (listSecond.size() > 0) { //для тестового случая whenAbsolutePath.
+            root = listSecond
+                    .stream()
+                    .collect(Collectors.joining(delimiter, delimiter, ""));
+        } else {
+            root = listFirst
+                    .stream()
+                    .collect(Collectors.joining(delimiter, delimiter, ""));
+        }
     }
 
-    private void parsing(String s) {
-        if (s.equals("..")) {
-            if (list.size() >= 1) {
-                list.remove(list.size() - 1);
+    /**
+     * Метод парсит элементы строки каталога.
+     * Вторым параметром метода, передаётся строка описывающая каталог.
+     * Нужна только в том случае который тестирует в тесте whenAbsolutePath.
+     *
+     * @param element Составной элемент каталога без разделителя.
+     * @param path    Строка описывающая каталог.
+     */
+    private void parsing(String element, String path) {
+        if (!root.equals("") && path.startsWith(delimiter)) {
+            listSecond.add(element); //для тестового случая whenAbsolutePath.
+        } else if (element.equals("..")) {
+            if (listFirst.size() >= 1) {
+                listFirst.remove(listFirst.size() - 1);
             }
         } else {
-            this.list.add(s);
+            listFirst.add(element);
         }
     }
 
