@@ -1,10 +1,7 @@
 package ru.job4j.io.shell;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.stream;
 
 /**
  * <h2>Симуляция терминала Linux.</h2>
@@ -14,56 +11,59 @@ import static java.util.Arrays.stream;
  * @since 19.04.2021
  */
 public class Shell {
-    private String root = "";
-    private final String delimiter = "/";
-    private final List<String> listFirst = new ArrayList<>();
-    private final List<String> listSecond = new ArrayList<>();
+    private static final String DELIM = "/";
+    private final Stack<String> stack = new Stack<>();
 
-    /**
-     * В потоке применяется фильтр "пустышка".
-     * Без фильтра, при {@code path = "/user"}
-     * в {@code ArrayList<String> list} попадёт "пустышка":
-     * {@code ArrayList<String> list = {"","user"}}
-     *
-     * @param path Каталог.
-     */
     public void cd(String path) {
-        stream(path.split(delimiter))
-                .filter(f -> !f.equals(""))
-                .forEach(f -> this.parsing(f, path));
-
-        if (listSecond.size() > 0) { //для тестового случая whenAbsolutePath.
-            root = listSecond
-                    .stream()
-                    .collect(Collectors.joining(delimiter, delimiter, ""));
+        if (path.startsWith(DELIM)) {
+            parseAbsolute(path);
         } else {
-            root = listFirst
-                    .stream()
-                    .collect(Collectors.joining(delimiter, delimiter, ""));
+            parseRelative(path);
         }
     }
 
     /**
-     * Метод парсит элементы строки каталога.
-     * Вторым параметром метода, передаётся строка описывающая каталог.
-     * Нужна только в том случае который тестирует в тесте whenAbsolutePath.
+     * Метод парсит абсолютный путь.
      *
-     * @param element Составной элемент каталога без разделителя.
-     * @param path    Строка описывающая каталог.
+     * @param path Путь.
      */
-    private void parsing(String element, String path) {
-        if (!root.equals("") && path.startsWith(delimiter)) {
-            listSecond.add(element); //для тестового случая whenAbsolutePath.
-        } else if (element.equals("..")) {
-            if (listFirst.size() >= 1) {
-                listFirst.remove(listFirst.size() - 1);
+    private void parseAbsolute(String path) {
+        String[] elements = path.split(DELIM);
+        for (String el: elements) {
+            if (!el.equals("")) { //избавляемся от пустышки.
+                stack.push(el);
+            } else if (!stack.isEmpty()) {
+                stack.clear();
             }
-        } else {
-            listFirst.add(element);
         }
     }
 
+    /**
+     * Метод парсит относительный путь.
+     *
+     * @param path Путь.
+     */
+    private void parseRelative(String path) {
+        String[] elements = path.split(DELIM);
+        for (String el: elements) {
+            if (el.equals("..")) {
+                stack.pop();
+            } else {
+                stack.push(el);
+            }
+        }
+    }
+
+    /**
+     * Метод возвращает текущий каталог.
+     *
+     * @return Каталог.
+     */
     public String pwd() {
-        return root;
+        if (stack.empty()) {
+            return DELIM;
+        }
+        return stack.stream()
+                    .collect(Collectors.joining(DELIM, DELIM, ""));
     }
 }
