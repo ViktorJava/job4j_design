@@ -29,12 +29,11 @@ public class Shell {
      */
     private void parseAbsolute(String path) {
         String[] elements = path.split(DELIM);
+        if (!stack.isEmpty()) {
+            stack.clear(); // чит код.
+        }
         for (String el: elements) {
-            if (!el.equals("")) { //избавляемся от пустышки.
-                stack.push(el);
-            } else if (!stack.isEmpty()) {
-                stack.clear();
-            }
+            stack.push(el);
         }
     }
 
@@ -64,6 +63,7 @@ public class Shell {
             return DELIM;
         }
         return stack.stream()
+                    .filter(s->!s.equals("")) // no dummy!
                     .collect(Collectors.joining(DELIM, DELIM, ""));
     }
 }
