@@ -45,9 +45,9 @@ public class Shell {
     private void parseRelative(String path) {
         String[] elements = path.split(DELIM);
         for (String el: elements) {
-            if (el.equals("..")) {
+            if (el.equals("..") && (!stack.isEmpty())) {
                 stack.pop();
-            } else {
+            } else if (!el.equals("..")) {
                 stack.push(el);
             }
         }
@@ -63,7 +63,7 @@ public class Shell {
             return DELIM;
         }
         return stack.stream()
-                    .filter(s->!s.equals("")) // no dummy!
+                    .filter(s -> !s.equals("")) // no dummy!
                     .collect(Collectors.joining(DELIM, DELIM, ""));
     }
 }
