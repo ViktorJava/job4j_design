@@ -16,14 +16,15 @@
 <p align="center">
 <img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="java" width="120" height="60"/>
 <img src="images/idea.png" alt="intellij" height="50"/>
-<img src="https://www.vectorlogo.zone/logos/github/github-ar21.svg" alt="github" height="60"/>
+<img src="https://www.vectorlogo.zone/logos/github/github-ar21.svg" alt="github" height="70"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Maven_logo.svg/680px-Maven_logo.svg.png" alt="maven" height="40"/>
 <img src="https://www.vectorlogo.zone/logos/travis-ci/travis-ci-ar21.svg" alt="Travis CI" width="120" height="60"/>
 <img src="images/checkstyle.png" alt="CheckStyle"  height="40"/>
-<img src="images/codecov.png" alt="Codecov"  height="40"/>
+<img src="images/codecov.png" alt="Codecov"  height="35"/>
 <img src="images/javafx.png" alt="JavaFX"  height="50"/>
 <img src="images/junit.png" alt="JUnit"  height="40"/>
-<img src="images/jcf.png" alt="JCF"  width="80"/>
+<img src="images/postgresql.png" alt="PSQL"  height="45"/>
+<img src="images/jcf.png" alt="JCF"  width="90"/>
 </p>
 
 ## Уровень "Джуниор"
@@ -51,7 +52,7 @@
 * Логгирование. Логгирование системы. **Slf4j** - вывод **exception**.
 * Сериализация. Формат **JSON**. Формат **XML**. **JAXB**. Преобразование **XML** в **POJO**. Преобразование **JSON** в **POJO**. 
 
-~~[Блок 3. SQL, JDBC](#)~~
+[Блок 3. SQL, JDBC](#)
 
 ~~[Блок 4. Garbage Collection](#)~~
 
