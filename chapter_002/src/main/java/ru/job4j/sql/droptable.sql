@@ -1,0 +1,10 @@
+--Удаление таблиц если они существуют.
+DROP TABLE IF EXISTS role_rules;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS attaches;
+DROP TABLE IF EXISTS rules;
+DROP TABLE IF EXISTS item;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS state;
