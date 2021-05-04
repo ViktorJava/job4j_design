@@ -13,6 +13,7 @@
     <modules>
         <module>chapter_001</module>
         <module>chapter_002</module>
+        <module>chapter_003</module>
     </modules>
 
     <properties>
@@ -81,6 +82,12 @@
             <artifactId>json</artifactId>
             <version>20210307</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.16</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -143,7 +150,8 @@
                         <configuration>
                             <finalName>pack</finalName>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>ru.job4j.io.zip.Zip</mainClass>
                                 </transformer>
                             </transformers>
