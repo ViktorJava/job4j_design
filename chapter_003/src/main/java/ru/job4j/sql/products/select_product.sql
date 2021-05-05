@@ -13,7 +13,8 @@
 --Запрос должен быть универсальным, т.е. не зависеть от конкретного временного промежутка
  SELECT p.name, p.expired_date
  FROM product p
- WHERE p.expired_date BETWEEN CURRENT_DATE AND CURRENT_DATE + interval '1 month';
+ WHERE extract(MONTH FROM p.expired_date)=extract(MONTH FROM CURRENT_DATE+interval '1 month') 
+ AND extract(YEAR FROM p.expired_date)=extract(YEAR FROM CURRENT_DATE+interval '1 month');
 
 --4. Написать запрос, который выводит самый дорогой продукт.
  SELECT name, price
