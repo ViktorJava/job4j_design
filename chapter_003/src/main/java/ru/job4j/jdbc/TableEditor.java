@@ -1,9 +1,7 @@
 package ru.job4j.jdbc;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.sql.*;
 import java.util.Properties;
 
 public class TableEditor implements AutoCloseable {
@@ -16,7 +14,27 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() {
-        connection = null;
+        //ClassLoader для получения пути к папке resources.
+        ClassLoader classLoader = ConnectionDemo.class.getClassLoader();
+        try {
+            properties.load(classLoader.getResourceAsStream("app.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //try {
+        //    Регистрация драйвера в системе.
+        //    Class.forName("org.postgresql.Driver");
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
+        //}
+        String url = properties.getProperty("url");
+        String password = properties.getProperty("password");
+        String login = properties.getProperty("login");
+        try {
+            connection = DriverManager.getConnection(url, login, password);
+        } catch (SQLException throwables) {
+            System.out.println("Неверный логин или пароль.");
+        }
     }
 
     /**
@@ -83,5 +101,10 @@ public class TableEditor implements AutoCloseable {
         if (connection != null) {
             connection.close();
         }
+    }
+
+    public static void main(String[] args) {
+        TableEditor tableEditor = new TableEditor(new Properties());
+
     }
 }
