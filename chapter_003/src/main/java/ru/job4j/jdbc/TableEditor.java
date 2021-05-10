@@ -1,40 +1,42 @@
 package ru.job4j.jdbc;
 
-import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class TableEditor implements AutoCloseable {
     private Connection connection;
-    private final Properties properties;
 
-    public TableEditor(Properties properties) {
-        this.properties = properties;
+
+    public TableEditor() {
         initConnection();
     }
 
+    /**
+     * Метод инициализации соединения с базой данных.
+     */
     private void initConnection() {
-        //ClassLoader для получения пути к папке resources.
-        ClassLoader classLoader = ConnectionDemo.class.getClassLoader();
         try {
-            properties.load(classLoader.getResourceAsStream("app.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            connection = getConnection();
+        } catch (Exception e) {
+            System.out.println("Неверный логин или пароль");
         }
-        //try {
-        //    Регистрация драйвера в системе.
-        //    Class.forName("org.postgresql.Driver");
-        //} catch (ClassNotFoundException e) {
-        //    e.printStackTrace();
-        //}
-        String url = properties.getProperty("url");
-        String password = properties.getProperty("password");
-        String login = properties.getProperty("login");
-        try {
-            connection = DriverManager.getConnection(url, login, password);
-        } catch (SQLException throwables) {
-            System.out.println("Неверный логин или пароль.");
-        }
+    }
+
+    /**
+     * Метод регистрирует драйвер в системе и получает соединение с базой данных,
+     * используя данные из проперти.
+     *
+     * @return Объект соединения с базой данных.
+     * @throws Exception Исключения соединения с базой данных.
+     */
+    private Connection getConnection() throws Exception {
+        ResourceBundle rb = ResourceBundle.getBundle("app");
+        String url = rb.getString("db.url");
+        String password = rb.getString("db.password");
+        String login = rb.getString("db.login");
+        String driver = rb.getString("db.driver");
+        Class.forName(driver); //Регистрация драйвера в системе.
+        return DriverManager.getConnection(url, login, password);
     }
 
     /**
@@ -42,7 +44,12 @@ public class TableEditor implements AutoCloseable {
      *
      * @param tableName Имя таблицы.
      */
-    public void createTable(String tableName) {
+    public void createTable(String tableName) throws SQLException {
+        String sql = String.format(
+                "CREATE TABLE IF NOT EXISTS %s();",
+                tableName
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -50,7 +57,12 @@ public class TableEditor implements AutoCloseable {
      *
      * @param tableName Имя таблицы.
      */
-    public void dropTable(String tableName) {
+    public void dropTable(String tableName) throws SQLException {
+        String sql = String.format(
+                "DROP TABLE IF EXISTS %s;",
+                tableName
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -60,7 +72,15 @@ public class TableEditor implements AutoCloseable {
      * @param columnName Имя столбца.
      * @param type       Тип столбца.
      */
-    public void addColumn(String tableName, String columnName, String type) {
+    public void addColumn(String tableName, String columnName,
+                          String type) throws SQLException {
+        String sql = String.format(
+                "ALTER TABLE %s ADD COLUMN %s %s;",
+                tableName,
+                columnName,
+                type
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -69,7 +89,13 @@ public class TableEditor implements AutoCloseable {
      * @param tableName  Имя таблицы.
      * @param columnName Имя столбца.
      */
-    public void dropColumn(String tableName, String columnName) {
+    public void dropColumn(String tableName, String columnName) throws SQLException {
+        String sql = String.format(
+                "ALTER TABLE %s DROP COLUMN %s;",
+                tableName,
+                columnName
+        );
+        executeStatement(sql);
     }
 
     /**
@@ -79,13 +105,22 @@ public class TableEditor implements AutoCloseable {
      * @param columnName    Имя столбца.
      * @param newColumnName Новое имя столбца.
      */
-    public void renameColumn(String tableName, String columnName, String newColumnName) {
+    public void renameColumn(String tableName, String columnName,
+                             String newColumnName) throws SQLException {
+        String sql = String.format(
+                "ALTER TABLE %s RENAME COLUMN %s TO %s;",
+                tableName,
+                columnName,
+                newColumnName
+        );
+        executeStatement(sql);
     }
 
     public String getScheme(String tableName) throws SQLException {
         StringBuilder scheme = new StringBuilder();
         DatabaseMetaData metaData = connection.getMetaData();
-        try (ResultSet columns = metaData.getColumns(null, null, tableName, null)) {
+        try (ResultSet columns = metaData.getColumns(null,
+                null, tableName, null)) {
             scheme.append(String.format("%-15s %-15s%n", "column", "type"));
             while (columns.next()) {
                 scheme.append(String.format("%-15s %-15s%n",
@@ -96,6 +131,16 @@ public class TableEditor implements AutoCloseable {
         return scheme.toString();
     }
 
+    /**
+     * Метод выполнения заявления.
+     *
+     * @param sql Запрос.
+     */
+    private void executeStatement(String sql) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.execute(sql);
+    }
+
     @Override
     public void close() throws Exception {
         if (connection != null) {
@@ -103,8 +148,26 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public static void main(String[] args) {
-        TableEditor tableEditor = new TableEditor(new Properties());
+    public static void main(String[] args) throws SQLException {
+        TableEditor tableEditor = new TableEditor();
+        System.out.println("Создание таблицы");
+        tableEditor.createTable("test_table");
 
+        System.out.println("Добавление столбца");
+        tableEditor.addColumn("test_table", "id",
+                "serial primary key");
+        System.out.println(tableEditor.getScheme("test_table"));
+
+        System.out.println("Переименование столбца");
+        tableEditor.renameColumn("test_table", "id",
+                "id_table");
+        System.out.println(tableEditor.getScheme("test_table"));
+
+        System.out.println("Удаление столбца");
+        tableEditor.dropColumn("test_table", "id_table");
+        System.out.println(tableEditor.getScheme("test_table"));
+
+        System.out.println("Удаление таблицы");
+        tableEditor.dropTable("test_table");
     }
 }
