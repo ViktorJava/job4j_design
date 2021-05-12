@@ -1,4 +1,4 @@
-package ru.job4j.jdbc;
+package ru.job4j.jdbc.statement;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
+ * Класс отработки навыков работы с классом PreparedStatement.
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 11.05.2021
@@ -27,6 +29,12 @@ public class PrepareStatementDemo {
         connection = DriverManager.getConnection(url, login, password);
     }
 
+    /**
+     * Метод вставки данных типа City, в таблицу.
+     *
+     * @param city Объект типа City.
+     * @return Объект типа City.
+     */
     public City insert(City city) {
         try (PreparedStatement statement =
                      connection.prepareStatement("insert into cities(name, population) values (?, ?)",
@@ -45,6 +53,12 @@ public class PrepareStatementDemo {
         return city;
     }
 
+    /**
+     * Обновление в таблице, данных типа City.
+     *
+     * @param city Объект типа City.
+     * @return true в случае удачи, иначе false.
+     */
     public boolean update(City city) {
         boolean result = false;
         try (PreparedStatement statement =
@@ -59,6 +73,12 @@ public class PrepareStatementDemo {
         return result;
     }
 
+    /**
+     * Удаление в таблице, данных типа City.
+     *
+     * @param id Идентификатор записи.
+     * @return true в случае удачи, иначе false.
+     */
     public boolean delete(int id) {
         boolean result = false;
         try (PreparedStatement statement =
@@ -71,6 +91,11 @@ public class PrepareStatementDemo {
         return result;
     }
 
+    /**
+     * Выборка всех данных в таблице.
+     *
+     * @return Список данных типа City.
+     */
     public List<City> findAll() {
         List<City> cities = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("select * from cities")) {
@@ -87,5 +112,14 @@ public class PrepareStatementDemo {
             e.printStackTrace();
         }
         return cities;
+    }
+
+    public static void main(String[] args) throws Exception {
+        PrepareStatementDemo prepareStatementDemo = new PrepareStatementDemo();
+        System.out.println(prepareStatementDemo
+                .insert(new City(1, "Kiev", 76000)));
+        prepareStatementDemo.update(new City(1, "Moscow", 176000));
+        List<City> ci = new ArrayList<>(prepareStatementDemo.findAll());
+        ci.forEach(System.out::println);
     }
 }

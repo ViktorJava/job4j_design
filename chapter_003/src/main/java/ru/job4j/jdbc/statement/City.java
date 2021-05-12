@@ -1,6 +1,8 @@
-package ru.job4j.jdbc;
+package ru.job4j.jdbc.statement;
 
 /**
+ * Модель типа City.
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 11.05.2021
@@ -38,5 +40,14 @@ public class City {
 
     public void setPopulation(int population) {
         this.population = population;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" + "id=" + id
+                + ", name='" + name
+                + '\''
+                + ", population=" + population
+                + '}';
     }
 }
