@@ -13,6 +13,13 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * <h2>Загрузка базы спамеров.</h2>
+ * <p>
+ * У нас появился клиент, который хочет создать базу данных для спамеров.
+ * На рынке ему продали диск в котором находятся txt файлы.
+ * Клиент просит перевести эти файлы в базу данных PostgreSQL.
+ * Применяем properties.
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 16.05.2021
@@ -30,8 +37,11 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            //TODO implement here.
-            users = null;
+            rd
+                    .lines()
+                    .map(s -> s.split(";"))
+                    .map(s -> new User(s[0], s[1]))
+                    .forEach(users::add);
         }
         return users;
     }
@@ -44,9 +54,10 @@ public class ImportDB {
                 cfg.getProperty("jdbc.password")
         )) {
             for (User user: users) {
-                try (PreparedStatement ps = cnt.prepareStatement("insert info users ...")) {
+                try (PreparedStatement ps = cnt.prepareStatement(
+                        "INSERT INTO users(name, email) VALUES (?, ?)")) {
                     ps.setString(1, user.name);
-                    ps.setString(1, user.email);
+                    ps.setString(2, user.email);
                     ps.execute();
                 }
             }
