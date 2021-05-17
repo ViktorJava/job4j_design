@@ -40,6 +40,7 @@ public class ImportDB {
             rd
                     .lines()
                     .map(s -> s.split(";"))
+                    .filter(s -> s.length >= 1)
                     .map(s -> new User(s[0], s[1]))
                     .forEach(users::add);
         }
