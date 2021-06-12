@@ -10,8 +10,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/ViktorJava/job4j_design)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ViktorJava/job4j_design)
 
-[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=ViktorJava&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
-
 ## Технологии и инструменты:
 <p align="center">
 <img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="java" width="120" height="60"/>
