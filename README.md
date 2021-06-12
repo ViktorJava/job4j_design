@@ -10,8 +10,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/ViktorJava/job4j_design)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ViktorJava/job4j_design)
 
-[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=ViktorJava&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
-
 ## Технологии и инструменты:
 <p align="center">
 <img src="https://www.vectorlogo.zone/logos/java/java-ar21.svg" alt="java" width="120" height="60"/>
@@ -52,7 +50,14 @@
 * Логгирование. Логгирование системы. **Slf4j** - вывод **exception**.
 * Сериализация. Формат **JSON**. Формат **XML**. **JAXB**. Преобразование **XML** в **POJO**. Преобразование **JSON** в **POJO**. 
 
-[Блок 3. SQL, JDBC](#)
+<a href="doc/sql.md" target="_blank">Блок 3. SQL, JDBC</a>
+* Настройка **PostgreSQL:** Установка, настройка, создание, подключение базы данных.
+* **Create, update, insert:** Базы данных, связи между таблицами, схема прав, пользователи и роли.
+* **Query:** **select, inner join**, группировка, агрегатные функции, фильтры.
+* **Outer join.** 
+* **JDBC.**
+* Проект: Агрегатор **Java** вакансий.
+
 
 ~~[Блок 4. Garbage Collection](#)~~
 
