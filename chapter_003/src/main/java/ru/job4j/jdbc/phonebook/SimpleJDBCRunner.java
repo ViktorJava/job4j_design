@@ -1,44 +1,64 @@
 package ru.job4j.jdbc.phonebook;
 
-import ru.job4j.jdbc.ConnectionDemo;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
 /**
+ * Пример подключения к Postgres db через JDBC.
+ * Пример обработки запроса базы данных.
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 08.05.2021
  */
-public class SimpleJDBCRunner implements AutoCloseable {
-    private Connection connection;
-    private final Properties properties;
+public class SimpleJDBCRunner {
+    private final Connection connection;
 
-    public SimpleJDBCRunner(Properties properties) {
-        this.properties = properties;
-        initConnection();
+    public SimpleJDBCRunner() throws Exception {
+        connection = SimpleJDBCRunner.initConnection();
     }
 
-    private void initConnection() {
-        ClassLoader classLoader = ConnectionDemo.class.getClassLoader();
-        try {
-            properties.load(classLoader.getResourceAsStream("pb.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    /**
+     * Метод читает ресурсный файл конфигурации Properties,
+     * возвращает соединение с базой данных.
+     *
+     * @return Connection
+     * @throws Exception Possible Exception.
+     */
+    private static Connection initConnection() throws Exception {
+        Properties properties = new Properties();
+        ClassLoader classLoader = SimpleJDBCRunner.class.getClassLoader();
+        properties.load(classLoader.getResourceAsStream("pb.properties"));
         String url = properties.getProperty("url");
-        String password = properties.getProperty("password");
-        String login = properties.getProperty("login");
-        try {
-            connection = DriverManager.getConnection(url, login, password);
-        } catch (SQLException throwables) {
-            System.out.println("Неверный логин или пароль.");
-        }
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("Select*From phonebook");
+        return DriverManager.getConnection(url, properties);
+    }
+
+    /**
+     * Метод создаёт конфигурацию типа Properties,
+     * возвращает соединение с базой данных.
+     * Метод демонстрирует один из способов работы с объектом типа Properties.
+     *
+     * @return Connection.
+     * @throws SQLException Possible Exception.
+     */
+
+    private static Connection initConnection2() throws SQLException {
+        Properties properties = new Properties();
+        properties.put("user", "postgres");
+        properties.put("password", "0000");
+        properties.put("autoReconnect", "true");
+        properties.put("characterEncoding", "UTF-8");
+        properties.put("useUnicode", "true");
+        String url = "jdbc:postgresql://localhost:5432/testphones";
+        return DriverManager.getConnection(url, properties);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SimpleJDBCRunner simpleJDBCRunner = new SimpleJDBCRunner();
+        try (Statement statement = simpleJDBCRunner.connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * FROM phonebook")
+        ) {
             ArrayList<Abonent> lst = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt(1);
@@ -51,20 +71,8 @@ public class SimpleJDBCRunner implements AutoCloseable {
             } else {
                 System.out.println("Not found");
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }
-
-    @Override
-    public void close() throws Exception {
-        if (connection != null) {
-            connection.close();
-        }
-    }
-
-    public static void main(String[] args) {
-        SimpleJDBCRunner simpleJDBCRunner = new SimpleJDBCRunner(new Properties());
-
     }
 }
