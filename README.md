@@ -58,10 +58,19 @@
 * **JDBC.**
 * Проект: Агрегатор **Java** вакансий.
 
+<a href="doc/gc.md" target="_blank">Блок 4. Garbage Collection</a>
+* Понятие сборщик мусора.
+* Виды сборщиков мусорa.
+* Профилирование приложения.
+* Типы ссылок. Коллекции на **soft weak** ссылках.
 
-~~[Блок 4. Garbage Collection](#)~~
-
-~~[Блок 5. ООД](#)~~
+<a href="doc/ood.md" target="_blank">Блок 5. ООД</a>
+* **TDD** (Test Driven Development).
+* **SRP** (Single Responsibility Principle).
+* **OCP** (Open Closed Principle).
+* **LSP** (Liskov Substitution Principle).
+* **ISP** (Interface Segregation Principle).
+* **DIP** (Dependency Inversion Principle).
 
 ## Лицензия
 	
