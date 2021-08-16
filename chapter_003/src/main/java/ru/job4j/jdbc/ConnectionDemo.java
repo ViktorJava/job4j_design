@@ -11,7 +11,7 @@ import java.util.Properties;
  * Пример подключения к Postgres db через JDBC.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
- * @version 0.1
+ * @version 0.2
  * @since 04.05.2021
  */
 public class ConnectionDemo {
@@ -21,10 +21,12 @@ public class ConnectionDemo {
         ClassLoader classLoader = ConnectionDemo.class.getClassLoader();
         properties.load(classLoader.getResourceAsStream("app.properties"));
 
-        Class.forName("org.postgresql.Driver");
-        String url = properties.getProperty("url");
-        String login = properties.getProperty("login");
-        String password = properties.getProperty("password");
+        String url = properties.getProperty("db.url");
+        String login = properties.getProperty("db.login");
+        String password = properties.getProperty("db.password");
+        String driver = properties.getProperty("db.driver");
+
+        Class.forName(driver);
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());
