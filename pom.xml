@@ -15,6 +15,7 @@
         <module>chapter_002</module>
         <module>chapter_003</module>
         <module>chapter_004</module>
+        <module>chapter_005</module>
     </modules>
 
     <properties>
@@ -22,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
-        <postgresql.version>42.2.16</postgresql.version>
+        <postgresql.version>42.2.23</postgresql.version>
         <slf4j.version>1.7.30</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <gson.version>2.8.6</gson.version>
@@ -44,12 +45,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.18.1</version>
-            <scope>test</scope>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
             <groupId>log4j</groupId>
