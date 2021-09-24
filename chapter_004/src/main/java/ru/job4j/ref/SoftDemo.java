@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +22,7 @@ public class SoftDemo {
         //example1();
         //example2();
         //example3();
-        example4();
+        weakRefUsage();
     }
 
     /**
@@ -92,7 +94,7 @@ public class SoftDemo {
      *
      * @throws IOException possible exception.
      */
-    private static void example4() throws IOException {
+    private static void softRefeUsage() throws IOException {
         BufferedReader br = new BufferedReader(
                 new FileReader("logFile.log"));
         SoftReference<String> softReference = new SoftReference<>(br.readLine());
@@ -100,6 +102,18 @@ public class SoftDemo {
         if (data != null) {
             //работаем с данными файла.
             System.out.println(data);
+        }
+    }
+
+    /**
+     * Пример того, как нужно безопасно работать с WeakReference.
+     */
+    private static void weakRefUsage() {
+        WeakReference<List<Integer>> weakRef = new WeakReference<>(
+                Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> strongRef = weakRef.get();
+        if (strongRef != null) {
+            strongRef.forEach(System.out::print);
         }
     }
 }
