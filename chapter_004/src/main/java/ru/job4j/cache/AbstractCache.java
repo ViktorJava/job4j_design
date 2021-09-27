@@ -8,7 +8,7 @@ import java.util.Map;
  * Абстрактный кэш.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
- * @version 0.1
+ * @version 1.1
  * @since 9/21/2021
  */
 public abstract class AbstractCache<K, V> {
@@ -32,18 +32,10 @@ public abstract class AbstractCache<K, V> {
      * @return Данные или Null при отсутствии файла.
      */
     public V get(K key) {
-        V result;
-        if (cache.containsKey(key)) {
-            result = cache.get(key).get();
-            if (result == null) {
-                V value = load(key);
-                put(key, value);
-                result = value;
-            }
-        } else {
-            V value = load(key);
-            put(key, value);
-            result = value;
+        V result = cache.getOrDefault(key, new SoftReference<>(null)).get();
+        if (result == null) {
+            result = load(key);
+            put(key, result);
         }
         return result;
     }
