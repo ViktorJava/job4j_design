@@ -21,8 +21,7 @@ public abstract class AbstractCache<K, V> {
      * @param value Данные отправляемые в кэш.
      */
     public void put(K key, V value) {
-        SoftReference<V> softReference = new SoftReference<>(value);
-        cache.put(key, softReference);
+        cache.put(key, new SoftReference<>(value));
     }
 
     /**
@@ -30,18 +29,22 @@ public abstract class AbstractCache<K, V> {
      * Если в кэше нет данных, подгружаются.
      *
      * @param key Ключ получения данных из кэша.
-     * @return Данные полученные из кэша.
+     * @return Данные или Null при отсутствии файла.
      */
-    @SuppressWarnings("UnnecessaryLocalVariable")
     public V get(K key) {
-        if (!cache.containsKey(key)) {
-            System.out.printf("ключа %s нет в кэше %n", key);
+        V result;
+        if (cache.containsKey(key)) {
+            result = cache.get(key).get();
+            if (result == null) {
+                V value = load(key);
+                put(key, value);
+                result = value;
+            }
+        } else {
             V value = load(key);
             put(key, value);
-            System.out.printf("кэшируем ключ %s%n", key);
+            result = value;
         }
-        System.out.printf("читаем ключ %s из кэша %n", key);
-        V result = cache.get(key).get(); //корректная работа с softReference.
         return result;
     }
 
