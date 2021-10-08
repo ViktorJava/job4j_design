@@ -14,6 +14,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * <h2>Архивировать проект</h2>
  * Класс, представляет собой, утилиту для архивации папки.
+ * Входные параметры: -d=<PATH> -e=<EXCLUDE_FILE> -o=<ARCHIVE_NAME>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -47,7 +48,7 @@ public class Zip {
      * включая подкаталоги учитывая исключенные файлы.
      *
      * @param filePath Корневой каталог.
-     * @param exclude   Расширение исключенных файлов.
+     * @param exclude  Расширение исключенных файлов.
      * @return Список файлов.
      */
     private static List<File> searchFile(Path filePath, String exclude) {
@@ -70,7 +71,8 @@ public class Zip {
     public static void main(String[] args) {
         if (args.length != 3) {
             throw new IllegalArgumentException(
-                    "Example: java -jar pack.jar <PATH> <EXCLUDE_FILE> <ARCHIVE_NAME>");
+                    "Example: java -jar pack.jar -d=<PATH> -e=<EXCLUDE_FILE> -o=<ARCHIVE_NAME>"
+                            + "\n java -jar pack.jar -d=c:\\projects -e=txt -o=zip");
         }
         ArgsName argsName = ArgsName.of(args);
         Path root = Paths.get(argsName.get("d")); //directory
