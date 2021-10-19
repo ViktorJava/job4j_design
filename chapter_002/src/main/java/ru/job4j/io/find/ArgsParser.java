@@ -39,7 +39,7 @@ public class ArgsParser {
      */
     private void parse(String[] args) {
         for (String arg: args) {
-            String[] split = arg.replaceFirst("-", "").split("=");
+            String[] split = arg/*.replaceFirst("-", "")*/.split("=");
             if (split.length != 2) {
                 throw new IllegalArgumentException("argument must be: -param=value");
             }
@@ -48,7 +48,7 @@ public class ArgsParser {
     }
 
     /**
-     * Фабричный метод.
+     * Парсер аргументов.
      *
      * @param args Массив параметров в формате -ключ=значение.
      * @return Объект типа ArgsName с распарсенными параметрами.

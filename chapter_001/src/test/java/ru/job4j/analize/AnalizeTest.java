@@ -6,8 +6,8 @@ import ru.job4j.analize.Analize.User;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * Тесты анализатора статистики по коллекциям.

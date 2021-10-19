@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @since 9/20/2021
  */
 
+@SuppressWarnings("deprecation")
 public class StrongDemo {
 
     public static void main(String[] args) throws InterruptedException {

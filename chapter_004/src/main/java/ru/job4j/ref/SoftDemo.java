@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @version 0.1
  * @since 9/20/2021
  */
+
+@SuppressWarnings("deprecation")
 public class SoftDemo {
     public static void main(String[] args) throws InterruptedException, IOException {
         //example1();

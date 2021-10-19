@@ -23,10 +23,10 @@ public class Finder {
     public static void main(String... args) {
         //try {
             ArgsParser argsParser = ArgsParser.of(args);
-        System.out.println(argsParser.get("d"));
-        System.out.println(argsParser.get("n"));
-        System.out.println(argsParser.get("t"));
-        System.out.println(argsParser.get("o"));
+        System.out.println(argsParser.get("-d"));
+        System.out.println(argsParser.get("-n"));
+        System.out.println(argsParser.get("-t"));
+        System.out.println(argsParser.get("-o"));
             //Predicate<Path> condition = new Predicate<Path>()
 
 

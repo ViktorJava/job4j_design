@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @version 0.1
  * @since 9/20/2021
  */
+@SuppressWarnings("deprecation")
 public class WeakDemo {
     public static void main(String[] args) throws InterruptedException {
         //example1();
