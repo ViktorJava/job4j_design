@@ -75,7 +75,7 @@
 <a href="https://docs.oracle.com/javase/tutorial/essential/io/index.html" target="_blank">Информацию черпать здесь: docs.oracle.com</a>
 
 ### 7.1. Поиск файлов по критерию
-[С целью, закрепления полученных знаний, необходимо выполнить задание.](https://github.com/ViktorJava/job4j_design/issues/60)
+[С целью, закрепления полученных знаний, необходимо выполнить задание.](https://github.com/ViktorJava/Finder)
 
 ### 7.2. Симуляция терминала Linux
 [По результатам проверки знаний, ментором, было предложено выполнить техническое задание.](https://github.com/ViktorJava/job4j_design/issues/59)
