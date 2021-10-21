@@ -9,14 +9,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Поиск максимального элемента в списке.
+ * Поиск максимального объекта в списке.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 10/20/2021
  */
 public class MaxMinTest {
-    List<Integer> list;
+    private List<Integer> list;
 
     @Before
     public void ini() {
