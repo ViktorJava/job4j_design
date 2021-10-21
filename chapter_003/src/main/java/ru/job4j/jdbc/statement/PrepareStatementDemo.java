@@ -25,7 +25,7 @@ public class PrepareStatementDemo {
         String password = rb.getString("db.password");
         String login = rb.getString("db.login");
         String driver = rb.getString("db.driver");
-        Class.forName(driver); //Регистрация драйвера в системе.
+        Class.forName(driver);
         connection = DriverManager.getConnection(url, login, password);
     }
 
@@ -37,7 +37,8 @@ public class PrepareStatementDemo {
      */
     public City insert(City city) {
         try (PreparedStatement statement =
-                     connection.prepareStatement("insert into cities(name, population) values (?, ?)",
+                     connection.prepareStatement(
+                             "insert into cities(name, population) values (?, ?)",
                              Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, city.getName());
             statement.setInt(2, city.getPopulation());
@@ -62,7 +63,8 @@ public class PrepareStatementDemo {
     public boolean update(City city) {
         boolean result = false;
         try (PreparedStatement statement =
-                     connection.prepareStatement("update cities set name = ?, population = ? where id = ?")) {
+                     connection.prepareStatement(
+                             "update cities set name = ?, population = ? where id = ?")) {
             statement.setString(1, city.getName());
             statement.setInt(2, city.getPopulation());
             statement.setInt(3, city.getId());

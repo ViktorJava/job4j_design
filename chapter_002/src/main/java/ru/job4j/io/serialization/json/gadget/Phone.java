@@ -23,6 +23,13 @@ public class Phone {
     private final Spec spec;
     private final String[] status;
 
+    public Phone(boolean available, int year, Spec spec, String... status) {
+        this.available = available;
+        this.year = year;
+        this.spec = spec;
+        this.status = status;
+    }
+
     public boolean isAvailable() {
         return available;
     }
@@ -37,13 +44,6 @@ public class Phone {
 
     public String[] getStatus() {
         return status;
-    }
-
-    public Phone(boolean available, int year, Spec spec, String... status) {
-        this.available = available;
-        this.year = year;
-        this.spec = spec;
-        this.status = status;
     }
 
     @Override

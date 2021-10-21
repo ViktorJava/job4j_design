@@ -14,14 +14,14 @@ public class FileCopyBufferedStream {
     public static void main(String[] args) {
         String inFileStr = "./data/java.bin";
         String outFileStr = "./data/java.png";
-        long startTime, elapsedTime;  // для скоростного benchmarking
-
-        // Проверка длинны файла.
+        long startTime, elapsedTime;
         File fileIn = new File(inFileStr);
         System.out.println("File size is " + fileIn.length() + " bytes");
 
-        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(inFileStr));
-             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outFileStr))) {
+        try (BufferedInputStream in = new BufferedInputStream(
+                new FileInputStream(inFileStr));
+             BufferedOutputStream out = new BufferedOutputStream(
+                     new FileOutputStream(outFileStr))) {
             startTime = System.nanoTime();
             int byteRead;
             while ((byteRead = in.read()) != -1) {

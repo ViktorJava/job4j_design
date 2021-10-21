@@ -6,6 +6,14 @@ import java.util.Map;
 /**
  * Класс предназначен для заполнения памяти, с целю мониторинга
  * срабатывания GC.
+ * <blockquote><pre>
+ * Load Java Heap with 3 M java.lang.String instances
+ * for (int i = 0; i < 3000000; i++) {
+ * Explicit GC!
+ * System.gc();
+ * Remove 2 M out of 3 M
+ * for (int i = 0; i < 2000000; i++)
+ * </pre></blockquote>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -18,17 +26,14 @@ public class GCTypeDemo2 {
         System.out.println("Start of program!");
         String stringWithPrefix = "stringWithPrefix";
 
-        // Load Java Heap with 3 M java.lang.String instances
         for (int i = 0; i < 3000000; i++) {
             String newString = stringWithPrefix + i;
             sContainer.put(newString, newString);
         }
         System.out.println("MAP size: " + sContainer.size());
 
-        // Explicit GC!
         System.gc();
 
-        // Remove 2 M out of 3 M
         for (int i = 0; i < 2000000; i++) {
             String newString = stringWithPrefix + i;
             sContainer.remove(newString);

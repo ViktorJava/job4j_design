@@ -48,10 +48,9 @@ public class PrintFiles implements FileVisitor<Path> {
      * @param file  Ссылка на файл.
      * @param attrs Основные атрибуты просматриваемого файла.
      * @return Продолжаем обход дерева CONTINUE.
-     * @throws IOException При возникновении IO исключений.
      */
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
         if (condition.test(file)) {
             paths.add(file);
         }
@@ -64,10 +63,10 @@ public class PrintFiles implements FileVisitor<Path> {
      * @param dir   Ссылка на каталог.
      * @param attrs Основные атрибуты файла.
      * @return Результат посещения.
-     * @throws IOException При возникновении IO исключений.
      */
     @Override
-    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult preVisitDirectory(
+            Path dir, BasicFileAttributes attrs) {
         return CONTINUE;
     }
 
@@ -77,10 +76,9 @@ public class PrintFiles implements FileVisitor<Path> {
      * @param file Ссылка на файл.
      * @param exc  Исключение ввода-вывода, препятствовавшее посещению файла.
      * @return Результат посещения.
-     * @throws IOException При возникновении IO исключений.
      */
     @Override
-    public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+    public FileVisitResult visitFileFailed(Path file, IOException exc) {
         return CONTINUE;
     }
 
@@ -95,10 +93,9 @@ public class PrintFiles implements FileVisitor<Path> {
      *            которое привело к преждевременному завершению
      *            итерации каталога.
      * @return Результат посещения.
-     * @throws IOException При возникновении IO исключений.
      */
     @Override
-    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
         return CONTINUE;
     }
 }

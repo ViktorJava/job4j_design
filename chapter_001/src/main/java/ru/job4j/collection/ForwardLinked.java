@@ -63,7 +63,9 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
-     * Метод удаляет элемент данных в конце списка.
+     * Метод удаляет элемент данных в конце списка.<p>
+     * {@code head = null; //удаление последнего оставшегося элемента в списке.}<p>
+     * {@code previous.next = null; //обрыв связи предыдущего с последующим элементом.}
      *
      * @return Значение удалённого элемента.
      * @throws NoSuchElementException Бросается исключение в случае отсутствия
@@ -81,9 +83,9 @@ public class ForwardLinked<T> implements Iterable<T> {
             current = current.next;
         }
         if (current == previous) {
-            head = null; //удаление последнего оставшегося элемента в списке.
+            head = null;
         }
-        previous.next = null; //обрыв связи предыдущего с последующим элементом.
+        previous.next = null;
         return current.value;
     }
 
@@ -122,7 +124,7 @@ public class ForwardLinked<T> implements Iterable<T> {
      * Возвращается итератор бегущий по элементам данных, типа {@code <T>}.
      *
      * @return Возвращаемый итератор.
-     * @throws NoSuchElementException обращение у несуществующему элементу.
+     * @throws NoSuchElementException обращение к несуществующему элементу.
      */
     @Override
     public Iterator<T> iterator() {

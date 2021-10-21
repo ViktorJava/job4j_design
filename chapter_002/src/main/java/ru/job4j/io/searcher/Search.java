@@ -18,7 +18,8 @@ public class Search {
 
     public static void main(String[] args) throws IOException {
         if (args.length != 2) {
-            throw new IllegalArgumentException("Example: java -jar search.jar <Path> <FileExtension>");
+            throw new IllegalArgumentException(
+                    "Example: java -jar search.jar <Path> <FileExtension>");
         }
         Path start = Paths.get(args[0]);
         search(start, p -> p

@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("deprecation")
 public class SoftDemo {
     public static void main(String[] args) throws InterruptedException, IOException {
-        //example1();
-        //example2();
-        //example3();
+        example1();
+        example2();
+        example3();
         weakRefUsage();
     }
 
@@ -49,7 +49,7 @@ public class SoftDemo {
         List<SoftReference<Object>> objects = new ArrayList<>();
         for (int i = 0; i < 13_000_000; i++) {
             objects.add(new SoftReference<>(new Object() {
-                final String value = String.valueOf(System.currentTimeMillis());
+                private final String value = String.valueOf(System.currentTimeMillis());
 
                 @Override
                 protected void finalize() {

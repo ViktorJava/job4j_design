@@ -63,10 +63,13 @@ public class SimpleHashMapTest {
         assertThat(simpleHashMap.get("two"), is(2));
     }
 
+    /**
+     * for (int i = 0; i < 13; i++) {    // capacity * 0.75
+     */
     @Test
     public void whenExpandTable() {
         SimpleHashMap<Integer, Integer> input = new SimpleHashMap<>();
-        for (int i = 0; i < 13; i++) {    // capacity * 0.75
+        for (int i = 0; i < 13; i++) {
             input.insert(i, i);
         }
         assertThat(input.size(), is(37));

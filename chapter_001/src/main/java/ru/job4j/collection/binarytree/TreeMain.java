@@ -12,7 +12,6 @@ import ru.job4j.collection.SimpleStack;
  */
 public class TreeMain {
     public static void main(String[] args) {
-        // Описание бинарного дерева.
         Node root =
                 new Node(20,
                         new Node(7,

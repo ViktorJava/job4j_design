@@ -15,9 +15,12 @@ import java.util.Properties;
  * @since 04.05.2021
  */
 public class ConnectionDemo {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+    /**
+     * ClassLoader служит для получения пути к папке resources.
+     */
+    public static void main(String[] args) throws
+            ClassNotFoundException, SQLException, IOException {
         Properties properties = new Properties();
-        //ClassLoader для получения пути к папке resources.
         ClassLoader classLoader = ConnectionDemo.class.getClassLoader();
         properties.load(classLoader.getResourceAsStream("app.properties"));
 

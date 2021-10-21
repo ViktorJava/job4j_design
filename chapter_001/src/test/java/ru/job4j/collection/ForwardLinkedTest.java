@@ -49,7 +49,9 @@ public class ForwardLinkedTest {
         assertThat(linked.deleteLast(), is(1));
     }
 
-    //Тесты обращённого односвязного списка.
+    /**
+     * Тесты обращённого односвязного списка.
+     */
     @Test
     public void whenAddThenIter() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();

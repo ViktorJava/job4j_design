@@ -24,7 +24,7 @@ public class SimpleArrayD<T> implements Iterable<T> {
     private Object[] container;
     private static final int DEFAULT_CAPACITY = 15;
     private int size;
-    private int modCount; //Счётчик изменений.
+    private int modCount;
 
     /**
      * Этот конструктор создаёт экземпляр класса {@link SimpleArrayD}
@@ -51,6 +51,7 @@ public class SimpleArrayD<T> implements Iterable<T> {
 
     /**
      * Добавить элемент в конец структуры данных.
+     * modeCount++ {fail-fast}
      *
      * @param model Добавляемый элемент.
      */
@@ -58,11 +59,12 @@ public class SimpleArrayD<T> implements Iterable<T> {
         resize();
         container[size] = model;
         size++;
-        modCount++; // fail-fast
+        modCount++;
     }
 
     /**
      * Метод добавляет элемент в хранилище согласно заданного индекса.
+     * modeCount++ {fail-fast}
      *
      * @param index Индекс в хранилище.
      * @param model Добавляемый элемент.
@@ -73,7 +75,7 @@ public class SimpleArrayD<T> implements Iterable<T> {
         System.arraycopy(container, index, container, index + 1,
                 size - index);
         container[index] = model;
-        modCount++; // fail-fast
+        modCount++;
         size++;
     }
 
@@ -93,7 +95,7 @@ public class SimpleArrayD<T> implements Iterable<T> {
     public void set(int index, T model) {
         Objects.checkIndex(index, size);
         container[index] = model;
-        modCount++; // fail-fast
+        modCount++;
     }
 
     /**
@@ -150,12 +152,13 @@ public class SimpleArrayD<T> implements Iterable<T> {
 
     /**
      * Реализация динамики хранилища.
+     * container = newArray пересетил хранилище.
      */
     public void resize() {
         if (container.length == size) {
             Object[] newArray = new Object[container.length * 2];
             System.arraycopy(container, 0, newArray, 0, size);
-            container = newArray; //пересетил хранилище.
+            container = newArray;
         }
     }
 
@@ -174,7 +177,7 @@ public class SimpleArrayD<T> implements Iterable<T> {
         System.arraycopy(container, index + 1, container, index,
                 size - index - 1);
         size--;
-        modCount++; // fail-fast
+        modCount++;
         return removedElement;
     }
 
@@ -194,11 +197,14 @@ public class SimpleArrayD<T> implements Iterable<T> {
         return false;
     }
 
+    /**
+     * final int expectedModCount = modCount fail-fast
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
             int iter;
-            final int expectedModCount = modCount; // fail-fast
+            final int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {

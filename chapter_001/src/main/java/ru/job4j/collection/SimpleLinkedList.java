@@ -22,12 +22,14 @@ import java.util.Objects;
  * создания итератора коллекция подверглась структурному изменению, итератор
  * должен кидать {@code ConcurrentModificationException}.
  * В методах, где используется индекс нужно делать валидацию.
+ * <p>
+ * private int modCount; //fail-fast поведение.
  * @since 01.02.2021
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
     private Node<E> head;
-    private Node<E> tail; //хвост цепочки данных
-    private int modCount; //fail-fast поведение.
+    private Node<E> tail;
+    private int modCount;
     private int size;
 
     /**
@@ -77,8 +79,8 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     }
 
     private static class Node<E> {
-        E value; // данные
-        Node<E> next; // следующий элемент в списке
+        E value;
+        Node<E> next;
 
         public Node(E value, Node<E> next) {
             this.value = value;
@@ -99,7 +101,7 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         return new Iterator<>() {
             private final int expectedModCount = modCount;
-            private Node<E> pointer = head; //указатель
+            private Node<E> pointer = head;
 
             @Override
             public boolean hasNext() {

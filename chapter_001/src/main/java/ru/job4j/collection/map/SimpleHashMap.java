@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Ассоциативный массив на базе хэш-таблицы унифицирован через джейнерик
- * и иметь методы:
+ * и имеет методы:
  * <pre>
  * {@code boolean insert(K key, V value);}
  * {@code V get(K key)};
@@ -16,21 +16,22 @@ import java.util.NoSuchElementException;
  * <li> Внутренняя реализация использует массив.
  * <li> Обеспечивает фиксированное время вставки и получение.
  * <li> Предусмотрена возможность роста хэш-таблицы при нехватке места для нового элемента.
- * <li> Методы разрешения коллизий не реализован. Если, при добавлении,
+ * <li> Методы разрешения коллизий не реализован. Если, при добавлении ключа,
  * ключ уже есть, то возвращать false.
+ * <p>
+ * {@code capacity = 1 << 4; // 16}
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 17.02.2021
  */
 public class SimpleHashMap<K, V> implements Iterable<V> {
+    private static final float LOAD_FACTOR = 0.75F;
     private int modCount;
-    private int capacity = 1 << 4; // 16
+    private int capacity = 1 << 4;
     @SuppressWarnings("unchecked")
     private Node<K, V>[] table = new Node[capacity];
     private int size;
-    private static final float LOAD_FACTOR = 0.75F;
-
 
     /**
      * Метод, вставляет запись в таблицу по ключу и его значению.

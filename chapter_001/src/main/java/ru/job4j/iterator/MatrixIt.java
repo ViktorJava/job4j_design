@@ -23,16 +23,17 @@ public class MatrixIt implements Iterator<Integer> {
 
     /**
      * Метод проверяет, есть ли следующий элемент.
+     * Условие проверяет: если есть строка, но строка пустая {{},{}}
+     * двигаемся на следующую строку.
+     * Возвращаем true если есть строка и в строке есть столбцы
      *
      * @return true в случае наличия следующего элемента, иначе false.
      */
     @Override
     public boolean hasNext() {
-        //если есть строка но строка пустая {{},{}} двигаемся на следующую строку.
         while (row < data.length && data[row].length == 0) {
             row++;
         }
-        //true если есть строка и в строке есть столбцы
         return (row < data.length && col < data[row].length);
     }
 

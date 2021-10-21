@@ -75,8 +75,8 @@ public class Zip {
                             + "\n java -jar pack.jar -d=c:\\projects -e=txt -o=zip");
         }
         ArgsName argsName = ArgsName.of(args);
-        Path root = Paths.get(argsName.get("d")); //directory
-        new Zip().packFiles(searchFile(root, argsName.get("e")), //exclude
-                new File(argsName.get("o"))); //output
+        Path root = Paths.get(argsName.get("d"));
+        new Zip().packFiles(searchFile(root, argsName.get("e")),
+                new File(argsName.get("o")));
     }
 }

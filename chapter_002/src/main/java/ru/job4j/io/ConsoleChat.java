@@ -16,8 +16,8 @@ import java.util.Random;
 public class ConsoleChat {
     private final String dialogLog;
     private final String botAnswers;
-    private static final String OUT = "закончить"; // программа прекращает работу
-    private static final String STOP = "стоп"; // бот замолкает
+    private static final String OUT = "закончить";
+    private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
     private static final String LS = System.lineSeparator();
     List<String> answersList = new ArrayList<>();

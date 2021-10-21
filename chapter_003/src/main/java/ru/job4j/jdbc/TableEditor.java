@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 public class TableEditor implements AutoCloseable {
     private Connection connection;
 
-
     public TableEditor() {
         initConnection();
     }
@@ -35,7 +34,7 @@ public class TableEditor implements AutoCloseable {
         String password = rb.getString("db.password");
         String login = rb.getString("db.login");
         String driver = rb.getString("db.driver");
-        Class.forName(driver); //Регистрация драйвера в системе.
+        Class.forName(driver);
         return DriverManager.getConnection(url, login, password);
     }
 

@@ -24,13 +24,14 @@ public class Shell {
 
     /**
      * Метод парсит абсолютный путь.
+     * stack.clear(); // чит код.
      *
      * @param path Путь.
      */
     private void parseAbsolute(String path) {
         String[] elements = path.split(DELIM);
         if (!stack.isEmpty()) {
-            stack.clear(); // чит код.
+            stack.clear();
         }
         for (String el: elements) {
             stack.push(el);
@@ -63,7 +64,7 @@ public class Shell {
             return DELIM;
         }
         return stack.stream()
-                    .filter(s -> !s.equals("")) // no dummy!
+                    .filter(s -> !s.equals(""))
                     .collect(Collectors.joining(DELIM, DELIM, ""));
     }
 }
