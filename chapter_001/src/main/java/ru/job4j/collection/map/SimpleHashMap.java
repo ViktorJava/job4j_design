@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
  * <li> Методы разрешения коллизий не реализован. Если, при добавлении ключа,
  * ключ уже есть, то возвращать false.
  * <p>
- * {@code capacity = 1 << 4; // 16}
+ * {@code capacity = 1 << 4;  16}
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1

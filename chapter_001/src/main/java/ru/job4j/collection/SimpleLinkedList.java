@@ -23,7 +23,7 @@ import java.util.Objects;
  * должен кидать {@code ConcurrentModificationException}.
  * В методах, где используется индекс нужно делать валидацию.
  * <p>
- * private int modCount; //fail-fast поведение.
+ * private int modCount; счетчик fail-fast поведения.
  * @since 01.02.2021
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
@@ -43,6 +43,7 @@ public class SimpleLinkedList<E> implements Iterable<E> {
 
     /**
      * Метод добавляет элемент данных в конец списка.
+     * modCount++; fail-fast поведение.
      *
      * @param value Добавляемый элемент в хранилище.
      */
@@ -95,7 +96,7 @@ public class SimpleLinkedList<E> implements Iterable<E> {
      *
      * @return Возвращаемый итератор.
      * @throws ConcurrentModificationException нарушение fail-fast поведения.
-     * @throws NoSuchElementException          обращение у несуществующему элементу.
+     * @throws NoSuchElementException Обращение к несуществующему элементу.
      */
     @Override
     public Iterator<E> iterator() {

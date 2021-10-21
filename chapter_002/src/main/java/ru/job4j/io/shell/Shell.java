@@ -24,7 +24,7 @@ public class Shell {
 
     /**
      * Метод парсит абсолютный путь.
-     * stack.clear(); // чит код.
+     * <p>stack.clear(); чит код.
      *
      * @param path Путь.
      */

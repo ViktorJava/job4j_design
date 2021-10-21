@@ -102,7 +102,6 @@ public class SoftDemo {
         SoftReference<String> softReference = new SoftReference<>(br.readLine());
         String data = softReference.get();
         if (data != null) {
-            //работаем с данными файла.
             System.out.println(data);
         }
     }
