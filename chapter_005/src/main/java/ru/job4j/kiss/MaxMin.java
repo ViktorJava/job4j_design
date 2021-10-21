@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Принципы Kiss, Dry и Yagni [#238813]
  * <p>Класс для поиска максимального и минимального элемента
- * по критерию java.util.Comparator.
+ * по критерию {@code java.util.Comparator}.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
