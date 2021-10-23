@@ -1,5 +1,6 @@
 package ru.job4j.tdd;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -9,7 +10,6 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Что такое TDD? [#4918]
@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
  * @version 0.1
  * @since 10/23/2021
  */
+@Ignore
 public class CinemaTest {
     /**
      * Покупка билета.
@@ -57,19 +58,6 @@ public class CinemaTest {
         Ticket ticket = cinema.buy(account, 1, 1, date);
         Ticket ticket2 = cinema.buy(account, 1, 1, date);
         assertNull(ticket2);
-    }
-
-    /**
-     * Зритель сдаёт билет.
-     */
-    @Test
-    public void deleteTicked() {
-        Account account = new AccountCinema();
-        Cinema cinema = new Cinema3D();
-        Calendar date = Calendar.getInstance();
-        date.set(2020, 10, 10, 23, 00);
-        Ticket ticket = cinema.buy(account, 1, 1, date);
-        assertTrue(cinema.delete(ticket));
     }
 
     /**
