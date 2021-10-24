@@ -1,5 +1,6 @@
 package ru.job4j.template;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import static org.hamcrest.Matchers.is;
  * @version 0.1
  * @since 10/23/2021
  */
+@Ignore
 public class ImpGeneratorTest {
     /**
      * Всё хорошо.
