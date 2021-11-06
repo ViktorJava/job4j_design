@@ -1,4 +1,4 @@
-package ru.job4j.srp;
+package ru.job4j.srp.violation;
 
 /**
  * Нарушение принципов SRP.

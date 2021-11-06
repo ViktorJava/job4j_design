@@ -1,4 +1,4 @@
-package ru.job4j.srp;
+package ru.job4j.srp.violation;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
