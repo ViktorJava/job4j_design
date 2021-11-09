@@ -2,6 +2,7 @@ package ru.job4j.srp.reports;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -101,5 +102,69 @@ public class ReportEngineTest {
                 .append("</table></body></htmal>")
                 .append(System.lineSeparator());
         assertThat(reportHTML.generate(em -> true), is(expected.toString()));
+    }
+
+    /**
+     * Тест генератора отчёта в JSON формате.
+     */
+    @Test
+    public void whenReportJSON() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 800);
+        store.add(worker);
+        Report reportJSON = new ReportJSON(store);
+        StringBuilder expected = new StringBuilder()
+                .append("[{\"name\":\"Ivan\",\"hired\":{\"year\":")
+                .append(worker.getHired().get(Calendar.YEAR))
+                .append(",").append("\"month\":")
+                .append(worker.getHired().get(Calendar.MONTH))
+                .append(",").append("\"dayOfMonth\":")
+                .append(worker.getHired().get(Calendar.DAY_OF_MONTH))
+                .append(",").append("\"hourOfDay\":")
+                .append(worker.getHired().get(Calendar.HOUR_OF_DAY))
+                .append(",").append("\"minute\":")
+                .append(worker.getHired().get(Calendar.MINUTE))
+                .append(",").append("\"second\":")
+                .append(worker.getHired().get(Calendar.SECOND))
+                .append("},").append("\"fired\":{\"year\":")
+                .append(worker.getHired().get(Calendar.YEAR))
+                .append(",").append("\"month\":")
+                .append(worker.getHired().get(Calendar.MONTH))
+                .append(",").append("\"dayOfMonth\":")
+                .append(worker.getHired().get(Calendar.DAY_OF_MONTH))
+                .append(",").append("\"hourOfDay\":")
+                .append(worker.getHired().get(Calendar.HOUR_OF_DAY))
+                .append(",").append("\"minute\":")
+                .append(worker.getHired().get(Calendar.MINUTE))
+                .append(",").append("\"second\":")
+                .append(worker.getHired().get(Calendar.SECOND))
+                .append("},").append("\"salary\":800.0}]");
+        assertThat(reportJSON.generate(em -> true), is(expected.toString()));
+    }
+
+    /**
+     * Тест генератора отчёта в XML формате.
+     */
+    @Test
+    public void whenReportXML() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat format =
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        Employee worker = new Employee("Ivan", now, now, 100500);
+        store.add(worker);
+        Report report = new ReportXML(store);
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
+                .append("<employees>\n")
+                .append("    <employee>\n")
+                .append("        <fired>").append(format.format(worker.getHired().getTime())).append("</fired>\n")
+                .append("        <hired>").append(format.format(worker.getHired().getTime())).append("</hired>\n")
+                .append("        <name>Ivan</name>\n")
+                .append("        <salary>100500.0</salary>\n")
+                .append("    </employee>\n")
+                .append("</employees>\n");
+        assertThat(report.generate(em -> true), is(expect.toString()));
     }
 }
