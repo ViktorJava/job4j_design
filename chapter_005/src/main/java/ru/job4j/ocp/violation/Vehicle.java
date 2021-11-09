@@ -17,5 +17,4 @@ public class Vehicle {
 }
 
 class Ship extends Vehicle {
-    //Корабль получил колёса.
 }
