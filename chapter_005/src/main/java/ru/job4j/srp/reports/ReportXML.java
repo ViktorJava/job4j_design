@@ -32,7 +32,6 @@ public class ReportXML implements Report {
             try (StringWriter writer = new StringWriter()) {
                 marshaller.marshal(employees, writer);
                 rsl = writer.getBuffer().toString();
-                System.out.println(rsl);
             }
         } catch (IOException | JAXBException e) {
             e.printStackTrace();
