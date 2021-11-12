@@ -21,6 +21,7 @@ public class AutoTransport {
 
     /**
      * Метод движения автотранспорта.
+     * fuel < 0 - понижение предусловий.
      *
      * @param km Расстояние перемещения автотранспорта.
      */
@@ -28,9 +29,8 @@ public class AutoTransport {
         if (km < 0) {
             throw new IllegalArgumentException("Invalid distance!");
         }
-        if (fuel < 0) { // <= предусловие
+        if (fuel < 0) {
             throw new IllegalArgumentException("Need more fuel!");
         }
-        // other logic
     }
 }

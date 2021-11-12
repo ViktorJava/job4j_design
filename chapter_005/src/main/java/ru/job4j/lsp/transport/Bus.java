@@ -19,6 +19,7 @@ public class Bus extends AutoTransport {
 
     /**
      * Метод движения автотранспорта.
+     * fuel < 5 - это усиление условий
      *
      * @param km Расстояние перемещения автобуса.
      */
@@ -27,9 +28,8 @@ public class Bus extends AutoTransport {
         if (km < 0) {
             throw new IllegalArgumentException("Invalid distance!");
         }
-        if (fuel < 5) { // условие усилено
+        if (fuel < 5) {
             throw new IllegalArgumentException("Need more fuel!");
         }
-        // other logic
     }
 }
