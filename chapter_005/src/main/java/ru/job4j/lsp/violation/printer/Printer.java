@@ -1,20 +1,26 @@
 package ru.job4j.lsp.violation.printer;
 
 /**
- * Класс принтера чисел.
+ * Модель данных принтер.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
- * @since 12.11.2021
+ * @since 13.11.2021
  */
-public class Printer implements IPrinter {
-    /**
-     * Метод печатает число на консоль.
-     *
-     * @param number Число.
-     */
-    @Override
-    public void printer(int number) {
-        System.out.println(number);
+public class Printer {
+    private final String text;
+    private final int paper;
+
+    public Printer(String text, int paper) {
+        this.text = text;
+        this.paper = paper;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getPaper() {
+        return paper;
     }
 }
