@@ -23,7 +23,6 @@ public class Trash implements Storage {
     public void put(Food food) {
         if (condition(food)) {
             foodList.add(food);
-            System.out.println("add trash");
         }
     }
 

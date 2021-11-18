@@ -14,7 +14,7 @@ public class Percent {
     /**
      * Метод расчёта процента, срока годности.
      * <p>
-     * a дней = количество дней с даты создания продукта по сегодняшний день.
+     * a дней = количество дней с даты создания продукта по сегодня.
      * b дней = количество дней за весь срок годности.
      * % = процент годности продукта.
      * ----------
@@ -26,8 +26,6 @@ public class Percent {
     public static int percent(Food food) {
         double a = ChronoUnit.DAYS.between(food.getCreateDate(), LocalDate.now());
         double b = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
-        var rsl = (int) (a / b * 100);
-        System.out.println(rsl);
-        return rsl;
+        return (int) (a / b * 100);
     }
 }
