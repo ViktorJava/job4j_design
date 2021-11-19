@@ -14,8 +14,9 @@ public interface Storage {
      * Добавить продукт в хранилище.
      *
      * @param food Объект типа Food.
+     * @return true в случае приёмки продукта в хранилище, иначе false.
      */
-    void put(Food food);
+    boolean put(Food food);
 
     /**
      * Вернуть список продуктов из хранилища.
@@ -30,5 +31,5 @@ public interface Storage {
      * @param food Объект типа Food.
      * @return true если продукт добавлен в хранилище, иначе false.
      */
-    boolean condition(Food food);
+    boolean accept(Food food);
 }

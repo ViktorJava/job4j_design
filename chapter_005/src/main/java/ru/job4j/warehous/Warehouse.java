@@ -17,14 +17,15 @@ public class Warehouse implements Storage {
      * Метод добавляет продукты на склад на основании ограничений.
      *
      * @param food Объект типа Food.
+     * @return true в случае приёмки продукта в хранилище, иначе false.
      */
-
     @Override
-    public void put(Food food) {
-        if (condition(food)) {
+    public boolean put(Food food) {
+        if (accept(food)) {
             foodList.add(food);
+            return true;
         }
-
+        return false;
     }
 
     /**
@@ -34,7 +35,7 @@ public class Warehouse implements Storage {
      */
     @Override
     public List<Food> get() {
-        return foodList;
+        return new ArrayList<>(foodList);
     }
 
     /**
@@ -43,7 +44,7 @@ public class Warehouse implements Storage {
      * @param food Объект типа Food.
      * @return true в случае добавления продукта на склад, иначе false.
      */
-    public boolean condition(Food food) {
-        return Percent.percent(food) < 25;
+    public boolean accept(Food food) {
+        return Percent.getPercentage(food) < 25;
     }
 }

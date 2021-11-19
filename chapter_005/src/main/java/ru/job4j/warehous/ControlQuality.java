@@ -20,11 +20,11 @@ public class ControlQuality {
     }
 
     /**
-     * Метод тестирует продукт в каждом из хранилищ из списка.
+     * Метод распределяет продукт по хранилищам.
      *
-     * @param food Продукт на тестирование.
+     * @param food Продукт на распределение.
      */
-    public void test(Food food) {
+    public void distribute(Food food) {
         storageList.forEach(s -> s.put(food));
     }
 }

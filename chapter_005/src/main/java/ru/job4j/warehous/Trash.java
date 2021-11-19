@@ -18,12 +18,15 @@ public class Trash implements Storage {
      * Метод отправляет  продукты на свалку.
      *
      * @param food Объект типа Food.
+     * @return true в случае приёмки продукта в хранилище, иначе false.
      */
     @Override
-    public void put(Food food) {
-        if (condition(food)) {
+    public boolean put(Food food) {
+        if (accept(food)) {
             foodList.add(food);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -33,7 +36,7 @@ public class Trash implements Storage {
      */
     @Override
     public List<Food> get() {
-        return foodList;
+        return new ArrayList<>(foodList);
     }
 
     /**
@@ -43,7 +46,7 @@ public class Trash implements Storage {
      * @return true в случае отправки продукта на свалку, иначе false.
      */
     @Override
-    public boolean condition(Food food) {
+    public boolean accept(Food food) {
         return LocalDate.now().isAfter(food.getExpiryDate());
     }
 }

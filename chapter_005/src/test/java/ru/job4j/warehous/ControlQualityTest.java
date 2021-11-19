@@ -10,6 +10,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
+ * Хранилище продуктов [#852 #229795]
+ *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 15.11.2021
@@ -35,40 +37,80 @@ public class ControlQualityTest {
 
     /**
      * Свежесть продукта израсходована на 103% = Trash.
+     * Warehouse.foodList.size=0;
+     * Shop.foodList.size=0;
      */
     @Test
-    public void testTrash() {
+    public void whenTrash() {
         Food coffee = new Coffee("Jacobs", LocalDate.now().minusMonths(1),
                 LocalDate.now().minusDays(1), 120, 0);
         controlQuality = new ControlQuality(storageList);
-        controlQuality.test(coffee);
+        controlQuality.distribute(coffee);
         List<Food> expected = storageList.get(1).get();
         assertThat(expected.get(0).getName(), is("Jacobs"));
+        expected = storageList.get(0).get();
+        assertThat(expected.size(), is(0));
+        expected = storageList.get(2).get();
+        assertThat(expected.size(), is(0));
     }
 
     /**
-     * Свежесть продукта израсходована на 96% = Warehouse.
+     * Свежесть продукта израсходована на 96% = Shop.
+     * Trash.foodList.size=0;
+     * Warehouse.foodList.size=0;
      */
     @Test
-    public void testShopAndDiscount() {
+    public void whenShopAndDiscount() {
         Food coffee = new Coffee("MacCoffee", LocalDate.now().minusMonths(1),
                 LocalDate.now().plusDays(1), 100, 0);
         controlQuality = new ControlQuality(storageList);
-        controlQuality.test(coffee);
+        controlQuality.distribute(coffee);
         List<Food> expected = storageList.get(0).get();
         assertThat(expected.get(0).getDiscount(), is(25));
+        expected = storageList.get(1).get();
+        assertThat(expected.size(), is(0));
+        expected = storageList.get(2).get();
+        assertThat(expected.size(), is(0));
     }
 
     /**
      * Свежесть продукта израсходована на 3% = Warehouse.
+     * Shop.foodList.size=0;
+     * Trash.foodList.size=0;
      */
     @Test
-    public void testWarehouse() {
+    public void whenWarehouse() {
         Food coffee = new Coffee("BestOfTheBest", LocalDate.now().minusDays(1),
                 LocalDate.now().plusMonths(1), 300, 0);
         controlQuality = new ControlQuality(storageList);
-        controlQuality.test(coffee);
+        controlQuality.distribute(coffee);
         List<Food> expected = storageList.get(2).get();
         assertThat(expected.get(0).getName(), is("BestOfTheBest"));
+        expected = storageList.get(0).get();
+        assertThat(expected.size(), is(0));
+        expected = storageList.get(1).get();
+        assertThat(expected.size(), is(0));
+    }
+
+    /**
+     * Create date over expiry date.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void whenCreateDataOverExpiryDate() {
+        Food coffee = new Coffee("IceCoffee", LocalDate.now().plusDays(1),
+                LocalDate.now(), 50, 0);
+        controlQuality = new ControlQuality(storageList);
+        controlQuality.distribute(coffee);
+    }
+
+    /**
+     * Create date equals expiry date.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void whenCreateDateEqualsExpiryDate() {
+        Food coffee = new Coffee("IceCoffee", LocalDate.now(),
+                LocalDate.now(), 50, 0);
+        controlQuality = new ControlQuality(storageList);
+        controlQuality.distribute(coffee);
     }
 }

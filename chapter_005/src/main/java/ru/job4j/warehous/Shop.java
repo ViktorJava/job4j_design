@@ -18,12 +18,15 @@ public class Shop implements Storage {
      * Метод добавляет продукты в магазин.
      *
      * @param food Объект типа Food.
+     * @return true в случае приёмки продукта в хранилище, иначе false.
      */
     @Override
-    public void put(Food food) {
-        if (condition(food)) {
+    public boolean put(Food food) {
+        if (accept(food)) {
             foodList.add(food);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -33,7 +36,7 @@ public class Shop implements Storage {
      */
     @Override
     public List<Food> get() {
-        return foodList;
+        return new ArrayList<>(foodList);
     }
 
 
@@ -44,8 +47,8 @@ public class Shop implements Storage {
      * @return true в случае добавления продукта в магазин иначе false.
      */
 
-    public boolean condition(Food food) {
-        int curPercent = Percent.percent(food);
+    public boolean accept(Food food) {
+        int curPercent = Percent.getPercentage(food);
         if (curPercent >= 25 && curPercent <= 75) {
             return true;
         }
