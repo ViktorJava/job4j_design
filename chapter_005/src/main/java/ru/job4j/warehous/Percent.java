@@ -24,11 +24,11 @@ public class Percent {
      * @return Процент несвежести продукта.
      */
     public static int getPercentage(Food food) {
-        double a = ChronoUnit.DAYS.between(food.getCreateDate(), LocalDate.now());
-        double b = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
-        if (a < 0 || b <= 0) {
+        double startRange = ChronoUnit.DAYS.between(food.getCreateDate(), LocalDate.now());
+        double fullRange = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
+        if (startRange < 0 || fullRange <= 0) {
             throw new IllegalArgumentException("Create date over or equals expiry date.");
         }
-        return (int) (a / b * 100);
+        return (int) (startRange / fullRange * 100);
     }
 }
