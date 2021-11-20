@@ -1,4 +1,4 @@
-package ru.job4j.warehous;
+package ru.job4j.lsp.warehouse;
 
 import org.junit.Before;
 import org.junit.Test;

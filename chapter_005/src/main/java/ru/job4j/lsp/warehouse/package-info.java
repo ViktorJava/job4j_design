@@ -18,4 +18,4 @@
  * @version 0.1
  * @since 14.11.2021
  */
-package ru.job4j.warehous;
+package ru.job4j.lsp.warehouse;

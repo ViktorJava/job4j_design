@@ -1,21 +1,21 @@
-package ru.job4j.warehous;
+package ru.job4j.lsp.warehouse;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Свалка.
+ * Магазин реализует абстрактное хранилище.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 14.11.2021
  */
-public class Trash implements Storage {
+public class Shop implements Storage {
     private final List<Food> foodList = new ArrayList<>();
+    public static final int DISCOUNT = 25;
 
     /**
-     * Метод отправляет  продукты на свалку.
+     * Метод добавляет продукты в магазин.
      *
      * @param food Объект типа Food.
      * @return true в случае приёмки продукта в хранилище, иначе false.
@@ -30,7 +30,7 @@ public class Trash implements Storage {
     }
 
     /**
-     * Метод возвращает все продукты отправленные на свалку, в виде списка.
+     * Метод возвращает все продукты магазина в виде списка.
      *
      * @return Список продуктов.
      */
@@ -39,14 +39,23 @@ public class Trash implements Storage {
         return new ArrayList<>(foodList);
     }
 
+
     /**
      * Метод проверяет ограничения продукта.
      *
      * @param food Объект типа Food.
-     * @return true в случае отправки продукта на свалку, иначе false.
+     * @return true в случае добавления продукта в магазин иначе false.
      */
-    @Override
+
     public boolean accept(Food food) {
-        return LocalDate.now().isAfter(food.getExpiryDate());
+        int curPercent = Percent.getPercentage(food);
+        if (curPercent >= 25 && curPercent <= 75) {
+            return true;
+        }
+        if (curPercent > 75 && curPercent <= 100) {
+            food.setDiscount(DISCOUNT);
+            return true;
+        }
+        return false;
     }
 }

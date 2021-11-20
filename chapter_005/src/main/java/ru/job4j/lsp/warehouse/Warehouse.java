@@ -1,21 +1,20 @@
-package ru.job4j.warehous;
+package ru.job4j.lsp.warehouse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Магазин реализует абстрактное хранилище.
+ * Склад.
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
  * @since 14.11.2021
  */
-public class Shop implements Storage {
+public class Warehouse implements Storage {
     private final List<Food> foodList = new ArrayList<>();
-    public static final int DISCOUNT = 25;
 
     /**
-     * Метод добавляет продукты в магазин.
+     * Метод добавляет продукты на склад на основании ограничений.
      *
      * @param food Объект типа Food.
      * @return true в случае приёмки продукта в хранилище, иначе false.
@@ -30,7 +29,7 @@ public class Shop implements Storage {
     }
 
     /**
-     * Метод возвращает все продукты магазина в виде списка.
+     * Метод возвращает все продукты на складе, в виде списка.
      *
      * @return Список продуктов.
      */
@@ -39,23 +38,13 @@ public class Shop implements Storage {
         return new ArrayList<>(foodList);
     }
 
-
     /**
      * Метод проверяет ограничения продукта.
      *
      * @param food Объект типа Food.
-     * @return true в случае добавления продукта в магазин иначе false.
+     * @return true в случае добавления продукта на склад, иначе false.
      */
-
     public boolean accept(Food food) {
-        int curPercent = Percent.getPercentage(food);
-        if (curPercent >= 25 && curPercent <= 75) {
-            return true;
-        }
-        if (curPercent > 75 && curPercent <= 100) {
-            food.setDiscount(DISCOUNT);
-            return true;
-        }
-        return false;
+        return Percent.getPercentage(food) < 25;
     }
 }

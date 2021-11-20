@@ -1,4 +1,4 @@
-package ru.job4j.warehous;
+package ru.job4j.lsp.warehouse;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
