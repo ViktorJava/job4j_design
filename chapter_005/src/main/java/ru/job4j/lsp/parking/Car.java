@@ -1,4 +1,4 @@
-package ru.job4j.parking;
+package ru.job4j.lsp.parking;
 
 /**
  * Интерфейс описывающий абстрактный автомобиль.

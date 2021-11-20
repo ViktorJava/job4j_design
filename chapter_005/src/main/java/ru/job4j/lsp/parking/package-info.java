@@ -15,4 +15,4 @@
  * @version 0.1
  * @since 20.11.2021
  */
-package ru.job4j.parking;
+package ru.job4j.lsp.parking;

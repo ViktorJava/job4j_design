@@ -1,4 +1,4 @@
-package ru.job4j.parking;
+package ru.job4j.lsp.parking;
 
 /**
  * Интерфейс описывающий абстрактную парковку для автомобилей.
@@ -12,7 +12,7 @@ public interface Parking {
      * Метод принимает автомобиль на парковку.
      *
      * @param car Объект типа Car.
-     * @return true- в случае удачной парковки, иначе false.
+     * @return true в случае удачной парковки, иначе false.
      */
     boolean accept(Car car);
 }
