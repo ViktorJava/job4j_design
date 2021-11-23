@@ -14,11 +14,11 @@ public class ManagerParking implements Parking {
     /**
      * Количество свободных мест для пассажирских автомобилей.
      */
-    private final int passengerSpace;
+    private int passengerSpace;
     /**
      * Количество свободных мест для грузовых автомобилей.
      */
-    private final int truckSpace;
+    private int truckSpace;
     /**
      * Хранилище грузовых автомобилей.
      */
@@ -43,6 +43,19 @@ public class ManagerParking implements Parking {
      */
     @Override
     public boolean accept(Car car) {
+        if (car.getSize() == 1 && passengerSpace > 0) {
+            passengerSpace--;
+            passengerStorage.add(car);
+            return true;
+        } else if (car.getSize() > 1 && truckSpace > 0) {
+            truckSpace--;
+            truckStorage.add(car);
+            return true;
+        } else if (car.getSize() <= passengerSpace) {
+            passengerSpace -= car.getSize();
+            truckStorage.add(car);
+            return true;
+        }
         return false;
     }
 }

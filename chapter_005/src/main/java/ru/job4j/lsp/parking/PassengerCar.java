@@ -8,7 +8,7 @@ package ru.job4j.lsp.parking;
  * @since 20.11.2021
  */
 public class PassengerCar implements Car {
-    private final int size = 1;
+    public final static int SIZE = 1;
 
     /**
      * Метод возвращает размер легкового автомобиля.
@@ -17,6 +17,6 @@ public class PassengerCar implements Car {
      */
     @Override
     public int getSize() {
-        return size;
+        return SIZE;
     }
 }
