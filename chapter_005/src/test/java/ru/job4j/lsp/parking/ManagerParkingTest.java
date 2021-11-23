@@ -14,45 +14,58 @@ import static org.junit.Assert.assertTrue;
  * @since 20.11.2021
  */
 public class ManagerParkingTest {
-    @Ignore
+    /**
+     * Когда легковая паркуется на свою парковку.
+     */
     @Test
+    @Ignore
     public void whenPassengerCarParkingOK() {
         ManagerParking managerParking = new ManagerParking(1, 0);
         boolean rsl = managerParking.accept(new PassengerCar());
         assertTrue(rsl);
     }
 
+    /**
+     * Когда легковой нет места.
+     */
     @Test
+    @Ignore
     public void whenPassengerCarOnTruckParkingThenFalse() {
         ManagerParking managerParking = new ManagerParking(0, 1);
         boolean rsl = managerParking.accept(new PassengerCar());
         assertFalse(rsl);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenWrongTruckSize() {
-        new ManagerParking(0, 0).accept(new Truck(1));
-    }
-
-    @Ignore
+    /**
+     * Когда грузовик паркуется на своей парковке.
+     */
     @Test
-    public void whenTruckParkingIsTrue() {
-        ManagerParking managerParking = new ManagerParking(1, 1);
+    @Ignore
+    public void whenTruckOnTruckParkingThenTrue() {
+        ManagerParking managerParking = new ManagerParking(0, 1);
         boolean rsl = managerParking.accept(new Truck(2));
         assertTrue(rsl);
     }
 
+    /**
+     * Когда грузовик паркуется на парковке легковых машин.
+     */
     @Test
-    public void whenTruckParkingIsFalse() {
-        ManagerParking managerParking = new ManagerParking(1, 0);
+    @Ignore
+    public void whenTruckOnPassengerParkingThenTrue() {
+        ManagerParking managerParking = new ManagerParking(2, 0);
         boolean rsl = managerParking.accept(new Truck(2));
-        assertFalse(rsl);
+        assertTrue(rsl);
     }
 
+    /**
+     * Когда грузовику нет места.
+     */
     @Test
-    public void whenOnParkingNoEnoughFreeSpace() {
-        ManagerParking managerParking = new ManagerParking(1, 1);
-        boolean rsl = managerParking.accept(new Truck(3));
+    @Ignore
+    public void whenOnTruckParkingNoEnoughFreeSpace() {
+        ManagerParking managerParking = new ManagerParking(1, 0);
+        boolean rsl = managerParking.accept(new Truck(2));
         assertFalse(rsl);
     }
 }
