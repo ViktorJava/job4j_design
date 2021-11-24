@@ -43,11 +43,11 @@ public class ManagerParking implements Parking {
      */
     @Override
     public boolean accept(Car car) {
-        if (car.getSize() == 1 && passengerSpace > 0) {
+        if (car.getSize() == PassengerCar.SIZE && passengerSpace > 0) {
             passengerSpace--;
             passengerStorage.add(car);
             return true;
-        } else if (car.getSize() > 1 && truckSpace > 0) {
+        } else if (car.getSize() > PassengerCar.SIZE && truckSpace > 0) {
             truckSpace--;
             truckStorage.add(car);
             return true;
