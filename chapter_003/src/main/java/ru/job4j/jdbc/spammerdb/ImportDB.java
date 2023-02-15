@@ -19,6 +19,21 @@ import java.util.Properties;
  * На рынке ему продали диск в котором находятся txt файлы.
  * Клиент просит перевести эти файлы в базу данных PostgreSQL.
  * Применяем properties.
+ * <p>
+ * Необходимо создать базу данных spammer:
+ * <blockquote><pre>
+ * CREATE DATABASE spammer;
+ * </pre></blockquote>
+ * В этой базе данных, создать таблицу users:
+ * <blockquote><pre>
+ * CREATE TABLE users
+ * (
+ * id    serial PRIMARY KEY,
+ * NAME  VARCHAR,
+ * email varchar
+ * );
+ * </pre></blockquote>
+ * Доступ к базе данных конфигурируется в файле spammer.properties
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -47,13 +62,13 @@ public class ImportDB {
     }
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
-        Class.forName(cfg.getProperty("jdbc.driver"));
+        Class.forName(cfg.getProperty("driver"));
         try (Connection cnt = DriverManager.getConnection(
-                cfg.getProperty("jdbc.url"),
-                cfg.getProperty("jdbc.username"),
-                cfg.getProperty("jdbc.password")
+                cfg.getProperty("url"),
+                cfg.getProperty("username"),
+                cfg.getProperty("password")
         )) {
-            for (User user: users) {
+            for (User user : users) {
                 try (PreparedStatement ps = cnt.prepareStatement(
                         "INSERT INTO users(name, email) VALUES (?, ?)")) {
                     ps.setString(1, user.name);
@@ -76,7 +91,7 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-        try (FileInputStream in = new FileInputStream("./app.properties")) {
+        try (FileInputStream in = new FileInputStream("./spammer.properties")) {
             cfg.load(in);
         }
         ImportDB db = new ImportDB(cfg, "./dump.txt");
