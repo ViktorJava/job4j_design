@@ -5,17 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <h2>0. Что такое обобщенные типы (generics) [#438904]</h2>
+ * <h2>Что такое обобщенные типы (generics) [#438904]</h2>
  * Добавить 3 модели данных, которые образуют иерархию наследования:
- * {@link Animal} -> {@link Predator} -> {@link Tiger}
+ * {@link Animal} -{@literal >} {@link Predator} -{@literal >} {@link Tiger}
  * Написать код использующий модели.
- * @implNote
+ * <ul>
  * <li>1-ый метод - работает без ограничений, т.е. в него можно передавать
- * коллекцию, которая хранит любые типы.
+ * коллекцию, которая хранит любые типы.</li>
  * <li>2-ой метод - должен иметь ограничение сверху и
- * ограничиваться классом {@link Predator}.
+ * ограничиваться классом {@link Predator}.</li>
  * <li>3-ий метод - должен иметь ограничение снизу и
- * ограничиваться классом {@link Predator}.
+ * ограничиваться классом {@link Predator}.</li>
+ * </ul>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -45,7 +46,8 @@ public class Generics {
     }
 
     /**
-     * <h2>WildCard.</h2>
+     * WildCard.
+     * <p>
      * Метод - работает без ограничений, т.е. в него можно передавать
      * коллекцию, которая хранит любые типы.
      *
@@ -59,7 +61,8 @@ public class Generics {
     }
 
     /**
-     * <h2>Bounded WildCard.</h2>
+     * Bounded WildCard.
+     * <p>
      * Метод - должен иметь ограничение сверху и
      * ограничиваться классом {@link Predator}.
      *
@@ -73,7 +76,8 @@ public class Generics {
     }
 
     /**
-     * <h2>Lower bounded WildCard</h2>
+     * Lower bounded WildCard
+     * <p>
      * Метод - должен иметь ограничение снизу и
      * ограничиваться классом {@link Predator}.
      *

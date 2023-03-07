@@ -14,7 +14,10 @@ import java.util.zip.ZipOutputStream;
 /**
  * <h2>Архивировать проект</h2>
  * Класс, представляет собой, утилиту для архивации папки.
- * Входные параметры: -d=<PATH> -e=<EXCLUDE_FILE> -o=<ARCHIVE_NAME>
+ * <p>
+ * Входные параметры:
+ * <p>
+ * {@literal -d=<PATH> -e=<EXCLUDE_FILE> -o=<ARCHIVE_NAME>}
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
@@ -31,7 +34,7 @@ public class Zip {
     public void packFiles(List<File> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(
                 new BufferedOutputStream(new FileOutputStream(target)))) {
-            for (File file: sources) {
+            for (File file : sources) {
                 zip.putNextEntry(new ZipEntry(file.getPath()));
                 try (BufferedInputStream out = new BufferedInputStream(
                         new FileInputStream(file))) {
@@ -56,13 +59,13 @@ public class Zip {
         try {
             listPaths = Search.search(filePath,
                     p -> !p.toFile()
-                           .getName()
-                           .endsWith(exclude));
+                            .getName()
+                            .endsWith(exclude));
         } catch (IOException e) {
             e.printStackTrace();
         }
         List<File> listFiles = new ArrayList<>();
-        for (Path path: listPaths) {
+        for (Path path : listPaths) {
             listFiles.add(path.toFile());
         }
         return listFiles;

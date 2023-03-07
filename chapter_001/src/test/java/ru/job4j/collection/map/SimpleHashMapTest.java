@@ -64,7 +64,7 @@ public class SimpleHashMapTest {
     }
 
     /**
-     * for (int i = 0; i < 13; i++) {    capacity * 0.75
+     * for (int i = 0; i {@literal <} 13; i++) {    capacity * 0.75
      */
     @Test
     public void whenExpandTable() {

@@ -7,17 +7,19 @@ import java.util.NoSuchElementException;
 /**
  * Ассоциативный массив на базе хэш-таблицы унифицирован через джейнерик
  * и имеет методы:
- * <pre>
- * {@code boolean insert(K key, V value);}
- * {@code V get(K key)};
- * {@code boolean delete(K key);}
- * </pre>
- * <li> Реализован итератор, обладающий fail-fast поведением.
- * <li> Внутренняя реализация использует массив.
- * <li> Обеспечивает фиксированное время вставки и получение.
- * <li> Предусмотрена возможность роста хэш-таблицы при нехватке места для нового элемента.
- * <li> Методы разрешения коллизий не реализован. Если, при добавлении ключа,
- * ключ уже есть, то возвращать false.
+ * <pre><code class='java'>
+ * boolean insert(K key, V value);
+ * V get(K key);
+ * boolean delete(K key);
+ * </code></pre>
+ *
+ * <ul>
+ * <li> Реализован итератор, обладающий fail-fast поведением.</li>
+ * <li> Внутренняя реализация использует массив.</li>
+ * <li> Обеспечивает фиксированное время вставки и получение.</li>
+ * <li> Предусмотрена возможность роста хэш-таблицы при нехватке места для нового элемента.</li>
+ * <li> Методы разрешения коллизий не реализован. Если, при добавлении ключа, ключ уже есть, то возвращать false.</li>
+ * </ul>
  * <p>
  * {@code capacity = 1 << 4;  16}
  *
@@ -147,7 +149,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     private void expandTable() {
         capacity = getPrime(capacity * 2);
         Node<K, V>[] tempTable = new Node[capacity];
-        for (Node<K, V> node: table) {
+        for (Node<K, V> node : table) {
             if (node != null) {
                 tempTable[hash(node.getKey())] = node;
             }

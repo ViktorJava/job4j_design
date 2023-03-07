@@ -29,7 +29,7 @@ public class StatementDemo {
      * выполнение запроса (execute).
      *
      * @param args Аргументы.
-     * @throws Exception;
+     * @throws Exception Может выбросить исключение Exception.
      */
     public static void main(String[] args) throws Exception {
         try (Connection connection = getConnection()) {
@@ -50,7 +50,7 @@ public class StatementDemo {
      * @param connection Подключение к БД.
      * @param tableName  Имя таблицы БД.
      * @return Схема таблицы.
-     * @throws Exception;
+     * @throws Exception Метод может выбросить исключение Exception.
      */
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
         StringBuilder scheme = new StringBuilder();

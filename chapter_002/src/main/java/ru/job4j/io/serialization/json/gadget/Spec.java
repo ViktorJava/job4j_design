@@ -5,6 +5,7 @@ package ru.job4j.io.serialization.json.gadget;
  * <ul>
  * <li>ram- объём оперативной памяти
  * <li>cpu- название процессора.
+ * </ul>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1

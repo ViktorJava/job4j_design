@@ -4,9 +4,11 @@ package ru.job4j.collection;
  * <h2>Очередь на двух стеках [#438883]</h2>
  * Реализовать класс {@code SimpleQueue} - это очередь
  * FIFO - First Input First Output. Очередь реализованна на базе двух стеков.
+ * <ul>
  * <li>Метод {@code T poll()} - должен возвращать первое значение
- * и удалять его из коллекции.
- * <li>Метод {@code push(T value)} - помещает значение в конец.
+ * и удалять его из коллекции.</li>
+ * <li>Метод {@code push(T value)} - помещает значение в конец.</li>
+ * </ul>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1

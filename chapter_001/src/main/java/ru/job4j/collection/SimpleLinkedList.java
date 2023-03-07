@@ -8,13 +8,13 @@ import java.util.Objects;
 /**
  * <h2>Создать контейнер на базе связанного списка [#438882]</h2>
  * Необходимо создать динамический контейнер с методами:
+ * <ul>
  * <li>{@code add(E value)}; (добавляет в конец)
  * <li>{@code E get(int index)};
  * <li>реализовать интерфейс {@code Iterable<E>}.
- *
- * @author ViktorJava (gipsyscrew@gmail.com)
- * @version 0.1
- * @implNote Внутри контейнер должен базироваться на связанном списке
+ * </ul>
+ * <p>
+ * Внутри контейнер должен базироваться на связанном списке
  * {@code Node<E> node}. Использовать стандартные коллекции JDK
  * {@code ArrayList, LinkedList} и т.д. запрещено. Контейнер должен быть
  * динамическим, т.е. увеличиваться по мере добавления элементов.
@@ -23,7 +23,10 @@ import java.util.Objects;
  * должен кидать {@code ConcurrentModificationException}.
  * В методах, где используется индекс нужно делать валидацию.
  * <p>
- * private int modCount; счетчик fail-fast поведения.
+ * private int modCount; //счетчик fail-fast поведения.
+ *
+ * @author ViktorJava (gipsyscrew@gmail.com)
+ * @version 0.1
  * @since 01.02.2021
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
@@ -96,7 +99,7 @@ public class SimpleLinkedList<E> implements Iterable<E> {
      *
      * @return Возвращаемый итератор.
      * @throws ConcurrentModificationException нарушение fail-fast поведения.
-     * @throws NoSuchElementException Обращение к несуществующему элементу.
+     * @throws NoSuchElementException          Обращение к несуществующему элементу.
      */
     @Override
     public Iterator<E> iterator() {

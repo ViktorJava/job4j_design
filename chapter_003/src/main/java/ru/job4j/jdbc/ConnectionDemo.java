@@ -17,6 +17,11 @@ import java.util.Properties;
 public class ConnectionDemo {
     /**
      * ClassLoader служит для получения пути к папке resources.
+     *
+     * @param args Аргументы запуска программы.
+     * @throws ClassNotFoundException Может выбросить исключение ClassNotFoundException.
+     * @throws SQLException           Может выбросить исключение SQLException.
+     * @throws IOException            Может выбросить исключение IOException.
      */
     public static void main(String[] args) throws
             ClassNotFoundException, SQLException, IOException {

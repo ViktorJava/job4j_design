@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * <h2>FlatMap для Iterator<Iterator> [#438889]</h2>
+ * <h2>FlatMap для Iterator{@literal <Iterator>} [#438889]</h2>
  * В Stream API есть метод flatMap.
  * Он позволяет получить из элемента потока другой поток.
  * Необходимо создать подобное поведение.

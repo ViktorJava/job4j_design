@@ -42,6 +42,8 @@ public class TableEditor implements AutoCloseable {
      * Метод, создает пустую таблицу без столбцов с указанным именем;
      *
      * @param tableName Имя таблицы.
+     *
+     * @throws SQLException Метод может выбросить исключение SQLException.
      */
     public void createTable(String tableName) throws SQLException {
         String sql = String.format(
@@ -55,6 +57,8 @@ public class TableEditor implements AutoCloseable {
      * Метод, удаляет таблицу по указанному имени;
      *
      * @param tableName Имя таблицы.
+     *
+     * @throws SQLException Метод может выбросить исключение SQLException.
      */
     public void dropTable(String tableName) throws SQLException {
         String sql = String.format(
@@ -70,6 +74,7 @@ public class TableEditor implements AutoCloseable {
      * @param tableName  Имя таблицы.
      * @param columnName Имя столбца.
      * @param type       Тип столбца.
+     * @throws SQLException Метод может выбросить исключение SQLException.
      */
     public void addColumn(String tableName, String columnName,
                           String type) throws SQLException {
@@ -87,6 +92,7 @@ public class TableEditor implements AutoCloseable {
      *
      * @param tableName  Имя таблицы.
      * @param columnName Имя столбца.
+     * @throws SQLException Метод может выбросить исключение SQLException.
      */
     public void dropColumn(String tableName, String columnName) throws SQLException {
         String sql = String.format(
@@ -103,6 +109,7 @@ public class TableEditor implements AutoCloseable {
      * @param tableName     Имя таблицы.
      * @param columnName    Имя столбца.
      * @param newColumnName Новое имя столбца.
+     * @throws SQLException Метод может выбросить SQLException.
      */
     public void renameColumn(String tableName, String columnName,
                              String newColumnName) throws SQLException {

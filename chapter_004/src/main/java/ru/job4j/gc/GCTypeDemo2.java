@@ -8,11 +8,11 @@ import java.util.Map;
  * срабатывания GC.
  * <blockquote><pre>
  * Load Java Heap with 3 M java.lang.String instances
- * for (int i = 0; i < 3000000; i++) {
+ * for (int i = 0; i{@literal <} 3000000; i++) {
  * Explicit GC!
  * System.gc();
  * Remove 2 M out of 3 M
- * for (int i = 0; i < 2000000; i++)
+ * for (int i = 0; i{@literal <} 2000000; i++)
  * </pre></blockquote>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 9/8/2021
  */
 public class GCTypeDemo2 {
-    private static Map<String, String> sContainer = new HashMap<>();
+    private static final Map<String, String> sContainer = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println("Start of program!");

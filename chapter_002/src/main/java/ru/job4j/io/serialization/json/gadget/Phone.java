@@ -12,6 +12,7 @@ import java.util.Arrays;
  * <li>{@code year} - год выпуска
  * <li>{@code spec} - член класса {@link Spec}
  * <li>{@code status} - old, new, broken, etc.
+ * </ul>
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
