@@ -23,8 +23,8 @@ import java.util.Objects;
  * @since 30.01.2021
  */
 public class SimpleArrayD<T> implements Iterable<T> {
-    private Object[] container;
     private static final int DEFAULT_CAPACITY = 15;
+    private Object[] container;
     private int size;
     private int modCount;
 
