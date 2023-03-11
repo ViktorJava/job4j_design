@@ -13,7 +13,6 @@ public class Stor {
      */
     protected int amount;
 
-
     public Stor(int amount) {
         this.amount = amount;
     }

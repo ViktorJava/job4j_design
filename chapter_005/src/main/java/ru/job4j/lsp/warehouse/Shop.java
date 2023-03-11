@@ -11,8 +11,8 @@ import java.util.List;
  * @since 14.11.2021
  */
 public class Shop implements Storage {
-    private final List<Food> foodList = new ArrayList<>();
     public static final int DISCOUNT = 25;
+    private final List<Food> foodList = new ArrayList<>();
 
     /**
      * Метод добавляет продукты в магазин.
@@ -38,7 +38,6 @@ public class Shop implements Storage {
     public List<Food> get() {
         return new ArrayList<>(foodList);
     }
-
 
     /**
      * Метод проверяет ограничения продукта.

@@ -15,17 +15,17 @@ public class Spec {
     private final int ram;
     private final String cpu;
 
+    public Spec(int ram, String cpu) {
+        this.ram = ram;
+        this.cpu = cpu;
+    }
+
     public int getRam() {
         return ram;
     }
 
     public String getCpu() {
         return cpu;
-    }
-
-    public Spec(int ram, String cpu) {
-        this.ram = ram;
-        this.cpu = cpu;
     }
 
     @Override

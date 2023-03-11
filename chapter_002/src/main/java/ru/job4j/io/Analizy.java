@@ -10,8 +10,8 @@ import java.io.*;
  * @since 13.03.2021
  */
 public class Analizy {
-    private boolean flag = true;
     StringBuilder sb = new StringBuilder();
+    private boolean flag = true;
 
     /**
      * Метод должен находить диапазоны, когда сервер не работал.

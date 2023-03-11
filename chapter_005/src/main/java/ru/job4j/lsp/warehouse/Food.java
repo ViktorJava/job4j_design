@@ -10,11 +10,11 @@ import java.time.LocalDate;
  * @since 14.11.2021
  */
 public class Food {
+    int discount;
     private String name;
     private LocalDate createDate;
     private LocalDate expiryDate;
     private double price;
-    int discount;
 
     /**
      * Конструктор объекта типа Food.

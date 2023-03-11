@@ -14,14 +14,14 @@ import java.util.Random;
  * @since 29.03.2021
  */
 public class ConsoleChat {
-    private final String dialogLog;
-    private final String botAnswers;
     private static final String OUT = "закончить";
     private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
     private static final String LS = System.lineSeparator();
     List<String> answersList = new ArrayList<>();
     List<String> dialogList = new ArrayList<>();
+    private final String dialogLog;
+    private final String botAnswers;
 
     public ConsoleChat(String dialogLog, String botAnswers) {
         this.dialogLog = dialogLog;
@@ -48,7 +48,7 @@ public class ConsoleChat {
     public void dialogWriter() {
         try (BufferedWriter bw = new BufferedWriter(new
                 FileWriter(dialogLog, StandardCharsets.UTF_8))) {
-            for (String str: dialogList) {
+            for (String str : dialogList) {
                 bw.write(str);
             }
         } catch (IOException e) {

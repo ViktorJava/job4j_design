@@ -159,8 +159,10 @@ public class ReportEngineTest {
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
                 .append("<employees>\n")
                 .append("    <employee>\n")
-                .append("        <fired>").append(format.format(worker.getHired().getTime())).append("</fired>\n")
-                .append("        <hired>").append(format.format(worker.getHired().getTime())).append("</hired>\n")
+                .append("        <fired>").append(format
+                        .format(worker.getHired().getTime())).append("</fired>\n")
+                .append("        <hired>").append(format
+                        .format(worker.getHired().getTime())).append("</hired>\n")
                 .append("        <name>Ivan</name>\n")
                 .append("        <salary>100500.0</salary>\n")
                 .append("    </employee>\n")

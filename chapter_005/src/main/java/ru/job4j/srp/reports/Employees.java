@@ -17,11 +17,11 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employees {
-    private Employees() {
-    }
-
     @XmlElement(name = "employee")
     private List<Employee> employees;
+
+    private Employees() {
+    }
 
     public Employees(List<Employee> employees) {
         this.employees = employees;
