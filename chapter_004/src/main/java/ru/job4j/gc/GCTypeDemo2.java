@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 9/8/2021
  */
 public class GCTypeDemo2 {
-    private static final Map<String, String> sContainer = new HashMap<>();
+    private static final Map<String, String> CONTAINER = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println("Start of program!");
@@ -28,18 +28,18 @@ public class GCTypeDemo2 {
 
         for (int i = 0; i < 3000000; i++) {
             String newString = stringWithPrefix + i;
-            sContainer.put(newString, newString);
+            CONTAINER.put(newString, newString);
         }
-        System.out.println("MAP size: " + sContainer.size());
+        System.out.println("MAP size: " + CONTAINER.size());
 
         System.gc();
 
         for (int i = 0; i < 2000000; i++) {
             String newString = stringWithPrefix + i;
-            sContainer.remove(newString);
+            CONTAINER.remove(newString);
         }
 
-        System.out.println("MAP size: " + sContainer.size());
+        System.out.println("MAP size: " + CONTAINER.size());
         System.out.println("End of program!");
     }
 }
