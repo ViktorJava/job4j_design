@@ -15,18 +15,19 @@ public class Main {
     /**
      * Получаем контекст для доступа к АПИ
      * <blockquote><pre>
-     *  JAXBContext context = JAXBContext.newInstance(Person.class);
-     * //Создаем сериализатор
+     * JAXBContext context = JAXBContext.newInstance(Person.class);
+     * Создаем сериализатор
      * Marshaller marshaller = context.createMarshaller();
-     * //Указываем, что нам нужно форматирование
+     * Указываем, что нам нужно форматирование
      * marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-     * //Сериализуем
+     * Сериализуем
      * marshaller.marshal(person, writer);
-     * //Для десериализации нам нужно создать десериализатор
+     * Для десериализации нам нужно создать десериализатор
      * Unmarshaller unmarshaller = context.createUnmarshaller();
-     * //десериализуем
+     * десериализуем
      * Person result = (Person) unmarshaller.unmarshal(reader);
      * </pre></blockquote>
+     *
      * @param args Аргументы запуска программы.
      * @throws Exception Может выбросить исключение Exception.
      */

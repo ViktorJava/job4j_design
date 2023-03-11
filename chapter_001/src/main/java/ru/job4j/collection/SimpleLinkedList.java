@@ -23,7 +23,7 @@ import java.util.Objects;
  * должен кидать {@code ConcurrentModificationException}.
  * В методах, где используется индекс нужно делать валидацию.
  * <p>
- * private int modCount; //счетчик fail-fast поведения.
+ * счетчик fail-fast поведения. {@code private int modCount;}
  *
  * @author ViktorJava (gipsyscrew@gmail.com)
  * @version 0.1
